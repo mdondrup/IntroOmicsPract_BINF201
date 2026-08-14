@@ -227,7 +227,7 @@ We will use the IGV browser more in the following tutorials.
 
 ## Optional: Other genome browsers
 
- -  JBROWSE2 is a modern open-source genome browser. It allows users to view and compare genomic data, structural variations, and synteny across multiple organisms. It can be installed as a desktop app, or be embedded in web applications. Install the JBROWSE2 app and try to load the same data as before. 
+ -  [https://jbrowse.org/jb2/](JBROWSE2) is a modern open-source genome browser. It allows users to view and compare genomic data, structural variations, and synteny across multiple organisms. It can be installed as a desktop app, or be embedded in web applications. Install the JBROWSE2 app and try to load the same data as before. 
 
  - If you’re interested in the Ensemble genome browser, you can find tutorials about it on [https://training.ensembl.org/exercises](https://training.ensembl.org/exercises)
  

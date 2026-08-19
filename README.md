@@ -11,7 +11,7 @@ However, some of the later practicals use concepts that are explained in earlier
 For students taking the BINF201 course, all tools and data are provided on an [NREC](https://www.nrec.no/) server.
 In addition, the practicals contain installation instructions for the software tools, and links to the data in case you want to download it yourself.
 
-The practicals are tested and developped on a linux system. 
+The practicals are tested and developed on a linux system. 
 They are not guaranteed to work on Mac or Windows. 
 However, using [WSL (Windows subsystem for Linux](https://learn.microsoft.com/en-us/windows/wsl/install) should work for Windows users.
 

@@ -44,18 +44,28 @@ Conda allows users to easily install a range of (bio)informatics software and pa
 The main benefit of using Conda is that it automatically tries to solve dependencies.
 This means that if you ask Conda to install a certain software package (or python package), it will recursively check which other packages are required, and install them. 
 
-On NREC, software has been installed using [Miniforge](https://github.com/conda-forge/miniforge).
-Miniforge has two main benefits over using the standard Conda:
-- It uses the faster and more powerfull Mamba package manager, which is basically an upgrade of Conda. 
-- It preconfigures conda-forge as a package repository, allowing default access to a whole range of extra packages.
-Many of the bioinformatic packages that we will use, are only available through [Bioconda](https://bioconda.github.io/index.html). 
+On NREC, software has been installed using [Micromamba] (https://mamba.readthedocs.io/en/latest/installation/micromamba-installation.html)
+Micromamba is a lightweight re-implementation of Conda with the main advantage being its speed.  
+
+Note: if you see install commands starting with `conda`, in most cases, you can simply replace them with `mamba` or `micromamba` depending on the package manager you are using.  
+
+
+Many of the bioinformatic packages that we will use are available through [Bioconda](https://bioconda.github.io/index.html). 
 If you are installing the packages yourself, it is advised to set up the bioconda channel as part of the default by running the following code:
 
 ```
-conda config --add channels defaults
-conda config --add channels bioconda
-conda config --add channels conda-forge
+micromamba config set channel_priority strict
+micromamba config prepend channels bioconda
+micromamba config prepend channels conda-forge
+```
+
+Or for conda:
+```
+conda config --remove channels defaults
 conda config --set channel_priority strict
+conda config --prepend channels bioconda
+conda config --prepend channels conda-forge
+
 ```
 
 ## Data download

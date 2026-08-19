@@ -13,7 +13,7 @@ In addition, the practicals contain installation instructions for the software t
 
 The practicals are tested and developed on a linux system. 
 They are not guaranteed to work on Mac or Windows. 
-However, using [WSL (Windows subsystem for Linux](https://learn.microsoft.com/en-us/windows/wsl/install) should work for Windows users.
+However, using [WSL (Windows subsystem for Linux)](https://learn.microsoft.com/en-us/windows/wsl/install) should work for Windows users.
 
 ## Content
 

@@ -30,7 +30,7 @@ However, using [WSL (Windows subsystem for Linux](https://learn.microsoft.com/en
 
 ## Acknowledgements & Contact
 
-This github page has been developped and published by Bram Danneels. In case of comments or questions, please contact *bram.danneels(at)uib.no*
+This github page has been developped and published by Bram Danneels. In case of comments or questions, please contact *michael.dondrup(at)uib.no*
 
 Practical exercises are based on practicals orginally developped by Håkon Tjeldnes.
 

@@ -47,7 +47,7 @@ Now, go to the newly created directory (by running `cd Practical3`), and you are
 ### For students running on their own pc
 
 You will first have to setup the correct environment with the necessary tools. 
-See [the intro practical](00_IntroSetup.md) on how to install mamba, and how to create an enviroment for downloading the necessary data.
+See [the intro practical](00_IntroSetup.md) on how to install micromamba, and how to create an enviroment for downloading the necessary data.
 
 We need to create two enviroments: one for assembly, and one for BUSCO. 
 BUSCO has some very specific requirements, which are difficult to combine with other tools. 
@@ -55,8 +55,8 @@ We will thus install it in its own environment.
 To create the two environments including the necessary tools for this practical, run the following commands:
 
 ```
-mamba create -n BUSCO busco
-mamba create -n Assembly spades abyss megahit quast canu flye hifiasm
+micromamba create -n BUSCO busco
+micromamba create -n Assembly spades abyss megahit quast canu flye hifiasm
 ```
 > This will create two new environments called "BUSCO" and "Assembly" with the necessary tools.
 
@@ -111,7 +111,7 @@ For an overview of the data used in this practical, please see the [information 
 ## Quality Control
 
 Before assembling a genome, it is important to take a look at the data first. 
-Activate the QC environment created in practical 2: `conda activate QC`.
+Activate the QC environment created in practical 2: `micromamba activate QC`.
 Then, run FastQC on all four files, download the files, and look at the reports.
 
 > If you have problems downloading the files, you can find the relevant files in [this folder](../Outputs).
@@ -147,7 +147,7 @@ We will assemble the genome from the short reads using three different assembler
 The first one, [SPAdes](https://github.com/ablab/spades), is one of the most popular genome assemblers for small genomes (viral, bacterial, yeast). 
 It is also very popular for doing metagenome assembly (see practical 6).
 
-We will run SPAdes in two different modes: the "isolate" and the "careful" mode. Remember to switch back to the assembly environment first (`conda deactivate && conda activate Assembly`).
+We will run SPAdes in two different modes: the "isolate" and the "careful" mode. Remember to switch back to the assembly environment first (`micromamba deactivate && micromamba activate Assembly`).
 > The `&&` in the above command tells the command line "Do the first command (deactivate), and if that succeeds, run the second command (activate).
 
 ```
@@ -378,7 +378,7 @@ The BUSCO tool uses a database which contains sets of conserved genes (universal
 By checking how much of the genes that should be in your assembly are actually in your assembly, you can have a rough idea of how complete your assembly is.
 
 We will run BUSCO on the SPAdes-isolate assembly, the ABySS-k75 assembly, and the ABySS-k31 assembly. The most important step to running BUSCO is figuring out what lineage to use.
-BUSCO doesn't always run nicely with other programs, thus we had to install it in a separate environment (called "BUSCO"). So first activate the enviroment BUSCO (`conda activate BUSCO`).
+BUSCO doesn't always run nicely with other programs, thus we had to install it in a separate environment (called "BUSCO"). So first activate the enviroment BUSCO (`micromamba activate BUSCO`).
 To get an overview of which lineages are available, you can run the following commands:
 
 ```

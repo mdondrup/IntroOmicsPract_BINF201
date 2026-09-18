@@ -14,6 +14,8 @@ In this tutorial, we will have a look at the following assembly (or related) sof
 - [HifiAsm](https://github.com/chhylp123/hifiasm): An assembler specific for PacBio HiFi reads
 - [Quast](https://github.com/ablab/quast) - An assembly QC tool that generates assembly statistics
 - [BUSCO](https://busco.ezlab.org/) - A tool to assess assembly completeness
+- [FastK](https://github.com/thegenemyers/FASTK) - A fast k-mer counter used to build k-mer databases from sequencing reads
+- [Smudgeplot](https://github.com/KamilSJaron/smudgeplot) - A tool that uses heterozygous k-mer pairs to infer genome ploidy and identify signatures of genome structure (e.g. duplications, heterozygosity) directly from raw reads
 
 ### For students using NREC
 
@@ -421,6 +423,70 @@ Now try running BUSCO yourself on the two ABySS assemblies, but only using the `
 <summary>Are there large differences in BUSCO score between the assemblies?</summary>
 
 _There are no large differences, but the BUSCO score is slightly lower in the ABySS-k31 assembly (96.6% vs 97.7%)._
+</details>
+
+## Smudgeplot analysis
+
+So far, we have evaluated our short-read assemblies after they were assembled. Another useful approach is to inspect the raw reads directly before assembly. [Smudgeplot](https://github.com/KamilSJaron/smudgeplot) uses k-mer pair coverage information from a [FastK](https://github.com/thegenemyers/FASTK) database to infer the ploidy and heterozygosity structure of a genome without needing an assembly first.
+This can help detect genome properties such as diploidy, polyploidy, high heterozygosity, or genome duplications directly from the sequencing reads.
+
+On the NREC server, both `smudgeplot` and `FastK` are already installed in the `Assembly` micromamba environment. If you are not already in that environment, activate it now:
+
+```
+micromamba activate Assembly
+```
+
+For this example, we will not use the _M. genitalium_ reads from the rest of the practical. Instead, we will use the _S. cerevisiae_ demo dataset from the Smudgeplot documentation, which is already available on the server. Create a new folder in your own workspace, link the reads into it, and move into that folder:
+
+```
+cd /storage/{your_username}
+mkdir -p Smudgeplot
+ln -s /storage/data/03_Assembly/smudgeplot/SRR3265401_1.fastq.gz Smudgeplot/
+ln -s /storage/data/03_Assembly/smudgeplot/SRR3265401_2.fastq.gz Smudgeplot/
+cd Smudgeplot
+```
+> `mkdir -p` creates the `Smudgeplot` folder in your work directory.
+> `ln -s` makes symbolic links to the existing FASTQ files, so you can work with the data without copying it.
+
+Now create a k-mer database with FastK:
+
+```
+FastK -v -t4 -k31 -M16 -T4 SRR3265401_1.fastq.gz SRR3265401_2.fastq.gz -NFastK_Table
+```
+> `-k31` sets the k-mer size to 31.
+> `-t4` and `-T4` tell FastK to use 4 threads.
+> `-M16` sets the memory limit to 16 GB.
+> `-NFastK_Table` sets the name of the output k-mer database.
+
+Next, extract heterozygous k-mer pairs from the FastK database:
+
+```
+smudgeplot hetmers -L 12 -t 4 -o kmerpairs --verbose FastK_Table
+```
+> `hetmers` finds pairs of k-mers that differ by one base and are informative about genome structure.
+> `-L 12` filters out very low-frequency k-mers.
+> `-o kmerpairs` sets the output prefix for the extracted k-mer pairs.
+
+Finally, infer ploidy and generate the smudgeplot:
+
+```
+smudgeplot all -o trial_run kmerpairs_text.smu
+```
+
+This will generate several output files, including PDF plots, summary tables, and logs, all with the `trial_run_` prefix. Download and inspect the resulting smudgeplot PDF.
+
+<details>
+<summary>What does the main smudge in the plot represent, and what does its position tell you about the ploidy of the <i>S. cerevisiae</i> strain?</summary>
+
+_The main smudge is the most prominent cluster of heterozygous k-mer pairs, usually corresponding to the dominant allele relationship in the genome._
+_Here, the dominant AB smudge indicates a diploid genome structure, consistent with a standard diploid_ S. cerevisiae _strain showing a 1:1 allele ratio._
+</details>
+
+<details>
+<summary>If the genome had a more complex structure, what would you expect to see in the smudgeplot?</summary>
+
+_If multiple genome structures were present, you would expect additional smudges at different positions or ratios in the plot._
+_Those extra smudges could indicate polyploidy, segmental duplications, or more complex heterozygosity patterns._
 </details>
 
 ## Long Read Assembly

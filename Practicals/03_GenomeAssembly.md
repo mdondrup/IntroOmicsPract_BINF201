@@ -454,8 +454,9 @@ Now create a k-mer database with FastK:
 FastK -v -t4 -k31 -M16 -T4 SRR3265401_1.fastq.gz SRR3265401_2.fastq.gz -NFastK_Table
 ```
 > `-k31` sets the k-mer size to 31.
-> `-t4` and `-T4` tell FastK to use 4 threads.
+> `-t4` tells FastK to keep k-mers observed at least 4 times in the reads.
 > `-M16` sets the memory limit to 16 GB.
+> `-T4` tells FastK to use 4 threads.
 > `-NFastK_Table` sets the name of the output k-mer database.
 
 Next, extract heterozygous k-mer pairs from the FastK database:
@@ -465,7 +466,7 @@ smudgeplot hetmers -L 12 -t 4 -o kmerpairs --verbose FastK_Table
 ```
 > `hetmers` finds pairs of k-mers that differ by one base and are informative about genome structure.
 > `-L 12` filters out very low-frequency k-mers.
-> `-o kmerpairs` sets the output prefix for the extracted k-mer pairs.
+> `-o kmerpairs` sets the output prefix for the extracted k-mer pairs, including the `kmerpairs_text.smu` file used in the next step.
 
 Finally, infer ploidy and generate the smudgeplot:
 

@@ -452,7 +452,7 @@ cd Smudgeplot
 Now create a k-mer database with FastK. Note that `-t4` and `-T4` control different settings: `-t4` tells FastK to write the k-mer table and keep only k-mers with count 4 or higher, while `-T4` sets the number of threads.
 
 ```
-FastK -v -t4 -k31 -M16 -T4 SRR3265401_1.fastq.gz SRR3265401_2.fastq.gz -NFastK_Table
+FastK -v -t4 -k31 -M16 -T4 -NFastK_Table SRR3265401_1.fastq.gz SRR3265401_2.fastq.gz
 ```
 > `-k31` sets the k-mer size to 31.
 > `-t4` tells FastK to write the k-mer table and to keep k-mers observed at least 4 times in the reads.
@@ -495,7 +495,7 @@ scp {your_username}@{nrec_server}:/storage/{your_username}/Smudgeplot/trial_run*
 <summary>What does the main smudge in the plot represent, and what does its position tell you about the ploidy of the <i>S. cerevisiae</i> strain?</summary>
 
 _The main smudge is the most prominent cluster of heterozygous k-mer pairs, usually corresponding to the dominant allele relationship in the genome._
-_Here, the dominant AB smudge indicates a diploid genome structure, consistent with a standard diploid_ S. cerevisiae _strain showing a 1:1 allele ratio._
+_Here, the dominant AB smudge indicates a diploid genome structure, consistent with a standard diploid_ _S. cerevisiae_ _strain showing a 1:1 allele ratio._
 </details>
 
 <details>

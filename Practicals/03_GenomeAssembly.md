@@ -474,18 +474,18 @@ Finally, infer ploidy and generate the smudgeplot:
 smudgeplot all -o trial_run kmerpairs_text.smu
 ```
 
-This will generate several output files, including PDF plots, summary tables, and logs, all beginning with the `trial_run` prefix. To see which files were created, run:
+This will generate several output files, including PDF plots, summary tables, and logs, all beginning with the `trial_run` prefix. To see which `trial_run` outputs were created, run:
 
 ```
-ls trial_run*
+ls -d trial_run*
 ```
 
 Look for the generated smudgeplot PDF files in that output, then download and inspect them.
 
-For example, from your own computer you can download the PDF files with:
+For example, from your own computer you can download the resulting `trial_run` output files or folder with:
 
 ```
-scp {your_username}@{nrec_server}:/storage/{your_username}/Smudgeplot/trial_run*.pdf ./
+scp -r {your_username}@{nrec_server}:/storage/{your_username}/Smudgeplot/trial_run* ./
 ```
 > Replace `{your_username}` with your own username on the server.
 > Replace `{nrec_server}` with the address of your NREC server.

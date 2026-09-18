@@ -449,13 +449,13 @@ cd Smudgeplot
 > `mkdir -p` creates the `Smudgeplot` folder in your work directory.
 > `ln -s` makes symbolic links to the existing FASTQ files, so you can work with the data without copying it.
 
-Now create a k-mer database with FastK. Note that `-t4` and `-T4` control different settings: `-t4` is the minimum k-mer count cutoff, while `-T4` is the number of threads.
+Now create a k-mer database with FastK. Note that `-t4` and `-T4` control different settings: `-t4` tells FastK to write the k-mer table and keep only k-mers with count 4 or higher, while `-T4` sets the number of threads.
 
 ```
 FastK -v -t4 -k31 -M16 -T4 SRR3265401_1.fastq.gz SRR3265401_2.fastq.gz -NFastK_Table
 ```
 > `-k31` sets the k-mer size to 31.
-> `-t4` tells FastK to keep k-mers observed at least 4 times in the reads.
+> `-t4` tells FastK to write the k-mer table and to keep k-mers observed at least 4 times in the reads.
 > `-M16` sets the memory limit to 16 GB.
 > `-T4` tells FastK to use 4 threads.
 > `-NFastK_Table` sets the name of the output k-mer database.

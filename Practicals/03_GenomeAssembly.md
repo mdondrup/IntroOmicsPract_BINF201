@@ -439,7 +439,7 @@ micromamba activate Assembly
 For this example, we will not use the _M. genitalium_ reads from the rest of the practical. Instead, we will use the _S. cerevisiae_ demo dataset from the Smudgeplot documentation, which is already available on the server. Create a new folder in your own workspace, link the reads into it, and move into that folder:
 
 ```
-cd /storage/{your_username}
+cd /storage/{your_username}/Practical3
 mkdir -p Smudgeplot
 ln -s /storage/data/03_Assembly/smudgeplot/SRR3265401_1.fastq.gz Smudgeplot/
 ln -s /storage/data/03_Assembly/smudgeplot/SRR3265401_2.fastq.gz Smudgeplot/
@@ -485,7 +485,7 @@ Look for the generated smudgeplot PDF files in that output, then download and in
 For example, from your own computer you can download the resulting `trial_run` output files or folder with:
 
 ```
-scp -r {your_username}@{nrec_server}:/storage/{your_username}/Smudgeplot/trial_run* ./
+scp -r {your_username}@{nrec_server}:/storage/{your_username}/Practical3/Smudgeplot/trial_run* ./
 ```
 > Replace `{your_username}` with your own username on the server.
 > Replace `{nrec_server}` with the address of your NREC server.

@@ -454,11 +454,8 @@ Now create a k-mer database with FastK:
 ```
 FastK -v -t4 -k31 -M16 -T4 -NFastK_Table SRR3265401_1.fastq.gz SRR3265401_2.fastq.gz
 ```
-> `-k31` sets the k-mer size to 31.
-> `-t4` tells FastK to produce a k-mer table that keeps k-mers observed at least 4 times.
-> `-M16` sets the memory limit to 16 GB.
-> `-T4` tells FastK to use 4 threads.
-> `-NFastK_Table` sets the name of the output k-mer database.
+> This command builds a 31-mer FastK database called `FastK_Table` from the two paired-end read files.
+> The example uses 4 threads and up to 16 GB of memory, following the Smudgeplot documentation.
 
 Next, extract heterozygous k-mer pairs from the FastK database:
 

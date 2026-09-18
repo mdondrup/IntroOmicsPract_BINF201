@@ -58,7 +58,7 @@ To create the two environments including the necessary tools for this practical,
 
 ```
 micromamba create -n BUSCO busco
-micromamba create -n Assembly spades abyss megahit quast canu flye hifiasm
+micromamba create -n Assembly spades abyss megahit quast canu flye hifiasm fastk smudgeplot kmc
 ```
 > This will create two new environments called "BUSCO" and "Assembly" with the necessary tools.
 
@@ -425,7 +425,7 @@ Now try running BUSCO yourself on the two ABySS assemblies, but only using the `
 _There are no large differences, but the BUSCO score is slightly lower in the ABySS-k31 assembly (96.6% vs 97.7%)._
 </details>
 
-## Smudgeplot analysis
+## Smudgeplot and GenomeScope analysis
 
 So far, we have evaluated our short-read assemblies after they were assembled. Another useful approach is to inspect the raw reads directly before assembly. [Smudgeplot](https://github.com/KamilSJaron/smudgeplot) uses k-mer pair coverage information from a [FastK](https://github.com/thegenemyers/FASTK) database to infer the ploidy and heterozygosity structure of a genome without needing an assembly first.
 This can help detect genome properties such as diploidy, polyploidy, high heterozygosity, or genome duplications directly from the sequencing reads.

@@ -477,6 +477,14 @@ smudgeplot all -o trial_run kmerpairs_text.smu
 
 This will generate several output files, including PDF plots, summary tables, and logs, all with the `trial_run_` prefix. In particular, look for `trial_run_smudgeplot.pdf` (and also `trial_run_smudgeplot_log10.pdf`), then download and inspect the resulting smudgeplot PDF.
 
+For example, from your own computer you can download the main plot with:
+
+```
+scp {your_username}@{nrec_server}:/storage/{your_username}/Smudgeplot/trial_run_smudgeplot.pdf ./
+```
+> Replace `{your_username}` with your own username on the server.
+> Replace `{nrec_server}` with the address of your NREC server.
+
 <details>
 <summary>What does the main smudge in the plot represent, and what does its position tell you about the ploidy of the <i>S. cerevisiae</i> strain?</summary>
 

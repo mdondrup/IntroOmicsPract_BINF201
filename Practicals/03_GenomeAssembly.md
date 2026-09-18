@@ -445,6 +445,7 @@ ln -s /storage/data/03_Assembly/smudgeplot/SRR3265401_1.fastq.gz Smudgeplot/
 ln -s /storage/data/03_Assembly/smudgeplot/SRR3265401_2.fastq.gz Smudgeplot/
 cd Smudgeplot
 ```
+> Replace `{your_username}` with your own username on the server.
 > `mkdir -p` creates the `Smudgeplot` folder in your work directory.
 > `ln -s` makes symbolic links to the existing FASTQ files, so you can work with the data without copying it.
 
@@ -474,7 +475,7 @@ Finally, infer ploidy and generate the smudgeplot:
 smudgeplot all -o trial_run kmerpairs_text.smu
 ```
 
-This will generate several output files, including PDF plots, summary tables, and logs, all with the `trial_run_` prefix. Download and inspect the resulting smudgeplot PDF.
+This will generate several output files, including PDF plots, summary tables, and logs, all with the `trial_run_` prefix. In particular, look for `trial_run_smudgeplot.pdf` (and also `trial_run_smudgeplot_log10.pdf`), then download and inspect the resulting smudgeplot PDF.
 
 <details>
 <summary>What does the main smudge in the plot represent, and what does its position tell you about the ploidy of the <i>S. cerevisiae</i> strain?</summary>

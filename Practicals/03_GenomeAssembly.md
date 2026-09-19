@@ -1,6 +1,6 @@
 # Practical 3 – Genome Assembly
 
-In this practical we will assemble bacterial genomes using different assembly software and methods (both for short and long reads), and compare the results.
+In this practical, we will assemble bacterial genomes using different assembly software and methods (both for short and long reads), and compare the results.
 
 ## Software installation and data retrieval
 
@@ -17,17 +17,19 @@ In this tutorial, we will have a look at the following assembly (or related) sof
 - [FastK](https://github.com/thegenemyers/FASTK) - A fast k-mer counter used to build k-mer databases from sequencing reads
 - [kmc](https://github.com/refresh-bio/KMC) – Another fast k-mer counter
 - [Smudgeplot](https://github.com/KamilSJaron/smudgeplot) - A tool that uses heterozygous k-mer pairs to infer genome ploidy and identify signatures of genome structure (e.g. duplications, heterozygosity) directly from raw reads
+- [Seqkit](https://bioinf.shenwei.me/seqkit/) – Versatile and ultrafast toolkit for FASTA/Q file manipulation
+
 
 ### For students using NREC
 
-The data and software has been set up on the NREC server. 
+The data and software have been set up on the NREC server. 
 Before starting the practical, make sure to activate the correct environment before each part of the tutorial!
-(e.g; `QC` for the QC part, `Assembly` for the assembly part)
+(e.g., `QC` for the QC part, `Assembly` for the assembly part)
 
 Then navigate to your work folder.
 We will not work on the home folder (`~` or `/home/{your_username}`) because there is only limited storage space (20Gb).
 You will be working on a mounted drive (200Gb) which is located in `/storage`.
-All students on NREC will have their own folder `/storage/{your_username}` (e.g. `/storage/brdan` if your username is "brdan").
+All students on NREC will have their own folder `/storage/{your_username}` (e.g., `/storage/brdan` if your username is "brdan").
 
 First of all, go to your work folder:
 
@@ -42,28 +44,28 @@ You can make a copy of the data you will be working on by running this command f
 mkdir -p Practical3
 ln -s /storage/data/03_Assembly/* Practical3/
 ```
-> `mkdir -p` creates a folder called Practical3. The "-p" options tells mkdir to create subdirectories if necessary, and to not give an error if the folder(s) already exist
-> `ln -s` creates what we call a "symbolic link". This creates a small file that just says "Instead of this file, use the file that I'm liking to". This allows you to "copy" files without actually having to make a physical copy.
+> `mkdir -p` creates a folder called Practical3. The "-p" option tells mkdir to create subdirectories if necessary, and not to give an error if the folder(s) already exist
+> `ln -s` creates what we call a "symbolic link". This creates a small file that just says "Instead of this file, use the file that I'm linking to". This allows you to "copy" files without actually having to make a physical copy.
 
 Now, go to the newly created directory (by running `cd Practical3`), and you are ready to start!
 
 ### For students running on their own pc
 
-You will first have to setup the correct environment with the necessary tools. 
-See [the intro practical](00_IntroSetup.md) on how to install micromamba, and how to create an enviroment for downloading the necessary data.
+You will first have to set up the correct environment with the necessary tools. 
+See [the intro practical](00_IntroSetup.md) on how to install micromamba and how to create an environment for downloading the necessary data.
 
-We need to create two enviroments: one for assembly, and one for BUSCO. 
+We need to create two environments: one for assembly, and one for BUSCO. 
 BUSCO has some very specific requirements, which are difficult to combine with other tools. 
 We will thus install it in its own environment. 
-To create the two environments including the necessary tools for this practical, run the following commands:
+To create the two environments, including the necessary tools for this practical, run the following commands:
 
 ```
 micromamba create -n BUSCO busco
-micromamba create -n Assembly spades abyss megahit quast canu flye hifiasm fastk smudgeplot kmc
+micromamba create -n Assembly spades abyss megahit quast canu flye hifiasm fastk smudgeplot kmc seqkit
 ```
 > This will create two new environments called "BUSCO" and "Assembly" with the necessary tools.
 
-Create a new folder (e.g. `Practical3`), go into it (`cd Practical3`), and then download the necessary data.
+Create a new folder (e.g., `Practical3`), go into it (`cd Practical3`), and then download the necessary data.
 You can either:
 
 - Download directly from the [Zenodo repository](https://zenodo.org/uploads/13120340):
@@ -212,11 +214,12 @@ These contain the intermediate and final output files. The files we are interest
 We will count the number of total sequences in each file using the following commands:
 
 ```
-grep -c ">" spades_*/contigs.fasta spades_*/scaffolds.fasta
+seqkit stats spades_*/contigs.fasta spades_*/scaffolds.fasta
 ```
-> `grep` is a program that performs text searches. Here we tell `grep` to search for the `>` sign in the files we give it (all `contigs.fasta` and `scaffolds.fasta` files in folders starting with `spades_`). 
-> The `-c` option tells grep we just want to count the number of times the `>` symbol appears. This command works to get the number of sequences because every sequence in a `.fasta` file starts with a single `>` symbol, and there can't be `>` symbol in the actual sequence.
+Seqkit is a fast and versatile toolkit for manipulation of FastA/Q type files.
+`seqkit stats` computes some basic statistics for each of the files, including the total number of sequences. 
 
+>
 <details>
 <summary>Are there any differences in the number of contigs or scaffolds between both runs?</summary>
 

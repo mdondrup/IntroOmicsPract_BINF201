@@ -106,7 +106,7 @@ rm -r SRR24462972*
 ## The Data
 
 The data for short-read assembly is composed of paired-end Illumina sequencing reads from _Mycoplasmoides genitalium_, 
-a pathogenic bacteria that causes infection of the urinary and genital tracts in humans. 
+a pathogenic bacterium that causes infection of the urinary and genital tracts in humans. 
 The data for long-read assembly is composed of Nanopore and PacBio HiFi reads from _Mycoplasma ovipneumoniae_, 
 a pathogenic bacterium causing pneumonia in sheep and goats.
 The reads used here are only subsets of the total data, to make sure the analyses don't take too long to run.
@@ -141,8 +141,8 @@ _The long reads show some adapters, and Nanopore has low-quality reads, but we w
 _200x coverage_
 
 _To calculate this, we need to first calculate the total number of bases in our read set._ 
-_We have two read sets with 387568 reads of 150bp. Thus, the total number of bases is 2\*387568\*150 = 116 270 400bp._
-_Since we know the genome is 580kbp (580 000bp) long, that means we should have an average coverage of 116270400/580000 or 200x coverage._
+_We have two read sets with 387568 reads of 150bp. Thus, the total number of bases is 2\*387568\*150 = 116,270,400 bp._
+_Since we know the genome is 580 kbp (580 000bp) long, that means we should have an average coverage of 116270400/580000 or 200x coverage._
 </details>
 
 ## Genome assembly using Spades
@@ -200,7 +200,7 @@ The assembly can take some minutes to complete. In the meantime, you can try ans
 _According to the SPAdes manual:_
 
 - _The `--isolate` option: This flag is highly recommended for high-coverage isolate and multi-cell Illumina data; it improves the assembly quality and running time. We also recommend trimming your reads prior to the assembly._
-- _The `--careful` option : Tries to reduce the number of mismatches and short indels. Also runs MismatchCorrector - a post processing tool, which uses BWA tool (comes with SPAdes). This option is recommended only for assembly of small genomes. We strongly recommend not to use it for large and medium-size eukaryotic genomes._
+- _The `--careful` option: Tries to reduce the number of mismatches and short indels. Also runs MismatchCorrector - a post processing tool, which uses the BWA tool (comes with SPAdes). This option is recommended only for assembly of small genomes. We strongly recommend not using it for large and medium-sized eukaryotic genomes._
 </details>
 
 <details>
@@ -211,15 +211,15 @@ _According to the SPAdes manual:_
 </details>
 
 <details>
-<summary>What is mate pair sequencing, and how is it similar and/or different from classic paired end sequencing?</summary>
+<summary>What is mate pair sequencing, and how is it similar and/or different from classic paired-end sequencing?</summary>
 
 _Mate Pair sequencing is a type of paired-end sequencing where the size of the DNA fragments is significantly larger._ 
-_Mate pair sequencing is often used in combination with normal paired end sequencing to improve difficult genome assemblies, and to generate longer scaffolds from the contigs._
+_Mate pair sequencing is often used in combination with normal paired-end sequencing to improve difficult genome assemblies and to generate longer scaffolds from the contigs._
 </details>
 
 Once SPAdes is done running, it will have created two new directories: `spades_isolate` and `spades_careful`.
 These contain the intermediate and final output files. The files we are interested in are the `contigs.fasta` and `scaffolds.fasta` files. 
-We will count the number of total sequences in each file using the following commands:
+We will count the total number of sequences in each file using the following commands:
 
 ```
 seqkit stats spades_*/contigs.fasta spades_*/scaffolds.fasta
@@ -257,14 +257,14 @@ We will run ABySS here using _k_-values of 31 and 75:
 
 ```
 mkdir -p Abyss_k31 Abyss_k75
-abyss-pe k=31 name=abyss_k31  B=1G in="MycGen_1.fastq MycGen_2.fastq"
-abyss-pe k=75 name=abyss_k75  B=1G in="MycGen_1.fastq MycGen_2.fastq"
+abyss-pe k=31 name=abyss_k31  B=1G in="MycGen_1.fastq.gz MycGen_2.fastq.gz"
+abyss-pe k=75 name=abyss_k75  B=1G in="MycGen_1.fastq.gz MycGen_2.fastq.gz"
 mv abyss_k31* Abyss_k31
 mv abyss_k75* Abyss_k75
 ```
-> The `k` option sets the _k_-mer length, the `B` option sets the size of the Bloom filter (a specific datastructure ABySS uses to store the De Bruijn Graph).
+> The `k` option sets the _k_-mer length, and the `B` option sets the size of the Bloom filter (a specific data structure ABySS uses to store the De Bruijn Graph).
 
-Once both assemblies are finished, the final contig files will be stored in the output directory, as `abyss_kXX-contigs.fa`. 
+Once both assemblies are finished, the final contig files will be stored in the output directory as `abyss_kXX-contigs.fa`. 
 Use `grep` again to find the number of contigs and scaffolds in the two ABySS assemblies.
 
 <details>
@@ -277,7 +277,7 @@ _Assuming the total assembly length is the same, having more contigs is worse th
 <details>
 <summary>Are there differences between scaffolds and contigs in the assemblies?</summary>
 
-_Yes: In general there are fewer scaffolds than contigs (582 vs 570 in k31; 29 vs 49 in k75)._
+_Yes: In general, there are fewer scaffolds than contigs (582 vs 570 in k31; 29 vs 49 in k75)._
 </details>
 
 <details>

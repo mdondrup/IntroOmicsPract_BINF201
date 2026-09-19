@@ -175,15 +175,22 @@ kmc_tools transform mycgen_k21 histogram mycgen_k21.histo
 
 Next, open the GenomeScope2 website at `http://genomescope.org/genomescope2.0/`, upload `mycgen_k21.histo`, and make sure you enter the same k-mer length (`21`) in the web form. **Do not use `https://` for this site: the GenomeScope2 website does not support HTTPS, so you must use the HTTP address.**
 
+<details>
+<summary>What do you have to set for ploidy and why?</summary>
+_ploidy = 1_
+_This is a bacterial genome. Bacteria normally have only one copy of their chromosome._
+
+</details>
+
 We will run SPAdes in two different modes: the "isolate" and the "careful" mode. Remember to switch back to the assembly environment first (`micromamba deactivate && micromamba activate Assembly`).
-> The `&&` in the above command tells the command line "Do the first command (deactivate), and if that succeeds, run the second command (activate).
+> The `&&` in the above command tells the command line, "Do the first command (deactivate), and if that succeeds, run the second command (activate).
 
 ```
 spades.py -t 2 -o spades_isolate -1 MycGen_1.fastq.gz -2 MycGen_2.fastq.gz --isolate
 spades.py -t 2 -o spades_careful -1 MycGen_1.fastq.gz -2 MycGen_2.fastq.gz --careful
 ```
 
-The assembly can take some minutes to complete. In the meantime, you can try answering following questions regarding genome sequencing and assembly:
+The assembly can take some minutes to complete. In the meantime, you can try answering the following questions regarding genome sequencing and assembly:
 > You can find the necessary information in the [SPAdes manual](https://ablab.github.io/spades/) and/or by searching on the internet.
 
 <details>
@@ -191,21 +198,21 @@ The assembly can take some minutes to complete. In the meantime, you can try ans
 
 _According to the SPAdes manual:_
 
-- _The `--isolate` option: This flag is highly recommended for high-coverage isolate and multi-cell Illumina data; improves the assembly quality and running time. We also recommend trimming your reads prior to the assembly._
+- _The `--isolate` option: This flag is highly recommended for high-coverage isolate and multi-cell Illumina data; it improves the assembly quality and running time. We also recommend trimming your reads prior to the assembly._
 - _The `--careful` option : Tries to reduce the number of mismatches and short indels. Also runs MismatchCorrector - a post processing tool, which uses BWA tool (comes with SPAdes). This option is recommended only for assembly of small genomes. We strongly recommend not to use it for large and medium-size eukaryotic genomes._
 </details>
 
 <details>
 <summary>SPAdes will create both contigs and scaffolds. What is the difference between both?</summary>
 
-- _Contigs are contigues sequences that are build from overlapping reads_
+- _Contigs are contiguous sequences that are built from overlapping reads_
 - _Scaffolds are the combination of contigs in a certain order and orientation_
 </details>
 
 <details>
 <summary>What is mate pair sequencing, and how is it similar and/or different from classic paired end sequencing?</summary>
 
-_Mate Pair sequencing is a type of paired end sequnecing where the size of the DNA fragments is significantly larger._ 
+_Mate Pair sequencing is a type of paired-end sequencing where the size of the DNA fragments is significantly larger._ 
 _Mate pair sequencing is often used in combination with normal paired end sequencing to improve difficult genome assemblies, and to generate longer scaffolds from the contigs._
 </details>
 
@@ -220,13 +227,18 @@ Seqkit is a fast and versatile toolkit for manipulation of FastA/Q type files.
 `seqkit stats` computes some basic statistics for each of the files, including the total number of sequences. 
 If you want to learn more about useful Seqkit commands, there's a [Sandbox tutorial](https://sandbox.bio/tutorials/seqkit-intro).
 
->
+
 <details>
 <summary>Are there any differences in the number of contigs or scaffolds between both runs?</summary>
 
 _Yes: the careful run has slightly more contigs and scaffolds compared to the isolate run (57 vs 54/53)._ 
 _There is no difference between contigs and scaffolds in the `careful` run, but there is one fewer scaffold than contigs in the `isolate` run._
 > _Note: the exact numbers you have may vary from the results given here._
+
+<summary>How does the assembly size turn out compared to the GenomeScope prediction and the known genome size</summary>
+_The size predicted by GenomeScope is ~564kb, and therefore underestimates the true genome size of ~580kb._
+_The assembly sizes are slightly larger at ~586kb, which is pretty good_
+
 </details>
 
 We will have a more detailed look at these assemblies later in the practical.

@@ -71,7 +71,6 @@ You can either:
 ```
 wget https://zenodo.org/records/13120340/files/03_Assembly.zip
 unzip 03_Assembly.zip
-pigz -d 03_Assembly/*gz
 ```
 
 - Download manually using the commands below:

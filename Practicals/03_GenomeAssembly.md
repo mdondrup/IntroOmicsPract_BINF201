@@ -177,8 +177,9 @@ Next, open the GenomeScope2 website at `http://genomescope.org/genomescope2.0/`,
 
 <details>
 <summary>What do you have to set for ploidy and why?</summary>
-_ploidy = 1_
-_This is a bacterial genome. Bacteria normally have only one copy of their chromosome._
+
+  - _ploidy = 1_
+  - _This is a bacterial genome. Bacteria normally have only one copy of their chromosome._
 
 </details>
 
@@ -234,10 +235,13 @@ If you want to learn more about useful Seqkit commands, there's a [Sandbox tutor
 _Yes: the careful run has slightly more contigs and scaffolds compared to the isolate run (57 vs 54/53)._ 
 _There is no difference between contigs and scaffolds in the `careful` run, but there is one fewer scaffold than contigs in the `isolate` run._
 > _Note: the exact numbers you have may vary from the results given here._
+</details>
 
+<details>
 <summary>How does the assembly size turn out compared to the GenomeScope prediction and the known genome size</summary>
-_The size predicted by GenomeScope is ~564kb, and therefore underestimates the true genome size of ~580kb._
-_The assembly sizes are slightly larger at ~586kb, which is pretty good_
+  
+- _The size predicted by GenomeScope is ~564 kbp, and therefore underestimates the true genome size of ~580 kbp._
+- _The assembly sizes are slightly larger at ~586 kbp, which is pretty good_
 
 </details>
 

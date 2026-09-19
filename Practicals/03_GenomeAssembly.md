@@ -16,7 +16,7 @@ In this tutorial, we will have a look at the following assembly (or related) sof
 - [BUSCO](https://busco.ezlab.org/) - A tool to assess assembly completeness
 - [FastK](https://github.com/thegenemyers/FASTK) - A fast k-mer counter used to build k-mer databases from sequencing reads
 - [kmc](https://github.com/refresh-bio/KMC) – Another fast k-mer counter
-- [Smudgeplot](https://github.com/KamilSJaron/smudgeplot) - A tool that uses heterozygous k-mer pairs to infer genome ploidy and identify signatures of genome structure (e.g. duplications, heterozygosity) directly from raw reads
+- [Smudgeplot](https://github.com/KamilSJaron/smudgeplot) - A tool that uses heterozygous k-mer pairs to infer genome ploidy and identify signatures of genome structure (e.g., duplications, heterozygosity) directly from raw reads
 - [Seqkit](https://bioinf.shenwei.me/seqkit/) – Versatile and ultrafast toolkit for FASTA/Q file manipulation
 
 

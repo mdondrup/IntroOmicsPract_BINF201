@@ -178,8 +178,8 @@ We will run SPAdes in two different modes: the "isolate" and the "careful" mode.
 > The `&&` in the above command tells the command line "Do the first command (deactivate), and if that succeeds, run the second command (activate).
 
 ```
-spades.py -t 2 -o spades_isolate -1 MycGen_1.fastq -2 MycGen_2.fastq --isolate
-spades.py -t 2 -o spades_careful -1 MycGen_1.fastq -2 MycGen_2.fastq --careful
+spades.py -t 2 -o spades_isolate -1 MycGen_1.fastq.gz -2 MycGen_2.fastq.gz --isolate
+spades.py -t 2 -o spades_careful -1 MycGen_1.fastq.gz -2 MycGen_2.fastq.gz --careful
 ```
 
 The assembly can take some minutes to complete. In the meantime, you can try answering following questions regarding genome sequencing and assembly:

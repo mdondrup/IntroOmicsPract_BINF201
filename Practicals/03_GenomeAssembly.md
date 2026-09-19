@@ -163,7 +163,7 @@ micromamba deactivate && micromamba activate Assembly
 Then create a 21-mer histogram with KMC:
 
 ```
-echo -e "MycGen_1.fastq\nMycGen_2.fastq" > reads.fof
+echo -e "MycGen_1.fastq.gz\nMycGen_2.fastq.gz" > reads.fof
 mkdir -p kmc_tmp
 kmc -k21 -t2 -m8 -ci1 @reads.fof mycgen_k21 kmc_tmp
 kmc_tools transform mycgen_k21 histogram mycgen_k21.histo

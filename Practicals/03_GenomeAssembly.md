@@ -149,6 +149,30 @@ We will assemble the genome from the short reads using three different assembler
 The first one, [SPAdes](https://github.com/ablab/spades), is one of the most popular genome assemblers for small genomes (viral, bacterial, yeast). 
 It is also very popular for doing metagenome assembly (see practical 6).
 
+### Estimating genome properties with GenomeScope2
+
+Before starting the assembly, it can be useful to inspect the Illumina reads with [GenomeScope2](http://genomescope.org/genomescope2.0/). GenomeScope2 fits a model to a k-mer histogram and can give a first estimate of genome size, repeat content, sequencing error rate, and heterozygosity directly from the raw reads. To do this, we first count k-mers from the paired-end reads with KMC, and then use the resulting histogram as input for the GenomeScope2 web interface.
+
+If you are still in the QC environment, switch back to the assembly environment first:
+
+```
+micromamba deactivate && micromamba activate Assembly
+```
+
+Then create a 21-mer histogram with KMC:
+
+```
+echo -e "MycGen_1.fastq\nMycGen_2.fastq" > reads.fof
+mkdir -p kmc_tmp
+kmc -k21 -t2 -m8 -ci1 @reads.fof mycgen_k21 kmc_tmp
+kmc_tools transform mycgen_k21 histogram mycgen_k21.histo
+```
+> `reads.fof` is a simple text file listing the paired-end read files that KMC should process.
+> `kmc` counts all 21-mers in the reads and stores them in a database called `mycgen_k21`.
+> `kmc_tools transform ... histogram` converts that database into the `mycgen_k21.histo` file that GenomeScope2 expects.
+
+Next, open the GenomeScope2 website at `http://genomescope.org/genomescope2.0/`, upload `mycgen_k21.histo`, and make sure you enter the same k-mer length (`21`) in the web form. **Do not use `https://` for this site: the GenomeScope2 website does not support HTTPS, so you must use the HTTP address.**
+
 We will run SPAdes in two different modes: the "isolate" and the "careful" mode. Remember to switch back to the assembly environment first (`micromamba deactivate && micromamba activate Assembly`).
 > The `&&` in the above command tells the command line "Do the first command (deactivate), and if that succeeds, run the second command (activate).
 

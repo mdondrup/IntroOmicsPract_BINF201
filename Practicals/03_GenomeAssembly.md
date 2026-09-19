@@ -218,6 +218,7 @@ seqkit stats spades_*/contigs.fasta spades_*/scaffolds.fasta
 ```
 Seqkit is a fast and versatile toolkit for manipulation of FastA/Q type files.
 `seqkit stats` computes some basic statistics for each of the files, including the total number of sequences. 
+If you want to learn more about useful Seqkit commands, there's a [Sandbox tutorial](https://sandbox.bio/tutorials/seqkit-intro).
 
 >
 <details>

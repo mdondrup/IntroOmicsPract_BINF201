@@ -11,7 +11,7 @@ In this tutorial, we will have a look at the following assembly (or related) sof
 - [Megahit](https://github.com/voutcn/megahit) - An ultrafast, memory-efficient De Bruijn Graph assembler for short reads
 - [Canu](https://github.com/marbl/canu): A long read assembler for both Nanopore and early (noisy) PacBio reads
 - [Flye](https://github.com/mikolmogorov/Flye): Another long-read assembler for all kinds of long reads (high or low error, Nanopore or PacBio)
-- [HifiAsm](https://github.com/chhylp123/hifiasm): An assembler specific for PacBio HiFi reads
+- [HifiAsm](https://github.com/chhylp123/hifiasm): An assembler specific for PacBio HiFi reads, recently extended for Nanopore
 - [Quast](https://github.com/ablab/quast) - An assembly QC tool that generates assembly statistics
 - [BUSCO](https://busco.ezlab.org/) - A tool to assess assembly completeness
 - [FastK](https://github.com/thegenemyers/FASTK) - A fast k-mer counter used to build k-mer databases from sequencing reads

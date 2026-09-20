@@ -340,9 +340,9 @@ _The ABYSS (k=75) assembly: 521282 bp (you can find this in "Largest contig" in 
 </details>
 
 <details>
-<summary>Which assembler had the most contigs? Which one the fewest?</summary>
+<summary>Which assembler had the most contigs? Which one had the fewest?</summary>
 
-_The ABySS assembly using k31 has the most contigs (482), the megahit assembly (final.contigs) has the fewest contigs (22)._
+_The ABySS assembly using k31 has the most contigs (482), and the MEGAHIT assembly (final.contigs) has the fewest contigs (22)._
 _You can find this under "# contigs (>= 0bp)" in the "Statistics without reference" section._
 </details>
 
@@ -476,7 +476,7 @@ Now try running BUSCO yourself on the two ABySS assemblies, but only using the `
 _There are no large differences, but the BUSCO score is slightly lower in the ABySS-k31 assembly (96.6% vs 97.7%)._
 </details>
 
-## Smudgeplot and GenomeScope analysis
+## Smudgeplot analysis
 
 So far, we have evaluated our short-read assemblies after they were assembled. Another useful approach is to inspect the raw reads directly before assembly. [Smudgeplot](https://github.com/KamilSJaron/smudgeplot) uses k-mer pair coverage information from a [FastK](https://github.com/thegenemyers/FASTK) database to infer the ploidy and heterozygosity structure of a genome without needing an assembly first.
 This can help detect genome properties such as diploidy, polyploidy, high heterozygosity, or genome duplications directly from the sequencing reads.
@@ -492,8 +492,8 @@ For this example, we will not use the _M. genitalium_ reads from the rest of the
 ```
 cd /storage/{your_username}/Practical3
 mkdir -p Smudgeplot
-ln -s /storage/data/03_Assembly/smudgeplot/SRR5678680_1.fastq.gz Smudgeplot/
-ln -s /storage/data/03_Assembly/smudgeplot/SRR5678680_2.fastq.gz Smudgeplot/
+ln -s /storage/data/03_Assembly/SRR5678680_1.fastq.gz Smudgeplot/
+ln -s /storage/data/03_Assembly/SRR5678680_2.fastq.gz Smudgeplot/
 cd Smudgeplot
 ```
 > Replace `{your_username}` with your own username on the server.

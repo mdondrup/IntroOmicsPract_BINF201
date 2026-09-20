@@ -478,7 +478,7 @@ _There are no large differences, but the BUSCO score is slightly lower in the AB
 
 ## Smudgeplot analysis
 
-So far, we have evaluated our short-read assemblies after they were assembled. Another useful approach is to inspect the raw reads directly before assembly. [Smudgeplot](https://github.com/KamilSJaron/smudgeplot) uses k-mer pair coverage information from a [FastK](https://github.com/thegenemyers/FASTK) database to infer the ploidy and heterozygosity structure of a genome without needing an assembly first.
+We have used GenomeScope to infer genome properties before the assembly. Another useful approach is to inspect the raw reads with Smudgeplot before assembly. [Smudgeplot](https://github.com/KamilSJaron/smudgeplot) uses k-mer pair coverage information from a [FastK](https://github.com/thegenemyers/FASTK) database to infer the ploidy and heterozygosity structure of a genome without needing an assembly first.
 This can help detect genome properties such as diploidy, polyploidy, high heterozygosity, or genome duplications directly from the sequencing reads.
 
 On the NREC server, both `smudgeplot` and `FastK` are already installed in the `Assembly` micromamba environment. If you are not already in that environment, activate it now:
@@ -487,7 +487,7 @@ On the NREC server, both `smudgeplot` and `FastK` are already installed in the `
 micromamba activate Assembly
 ```
 
-For this example, we will not use the _M. genitalium_ reads from the rest of the practical. Instead, we will use the _S. cerevisiae_ demo dataset from the Smudgeplot documentation, which is already available on the server. Create a new folder in your own workspace, link the reads into it, and move into that folder:
+For this example, we will not use the _M. genitalium_ reads from the rest of the practical because there isn't much to see here. Instead, we will use the _S. cerevisiae_ demo dataset from the Smudgeplot documentation, which is already available on the server. Create a new folder in your own workspace, link the reads into it, and move into that folder:
 
 ```
 cd /storage/{your_username}/Practical3

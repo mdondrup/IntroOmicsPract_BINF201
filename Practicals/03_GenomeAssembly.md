@@ -492,8 +492,8 @@ For this example, we will not use the _M. genitalium_ reads from the rest of the
 ```
 cd /storage/{your_username}/Practical3
 mkdir -p Smudgeplot
-ln -s /storage/data/03_Assembly/smudgeplot/SRR3265401_1.fastq.gz Smudgeplot/
-ln -s /storage/data/03_Assembly/smudgeplot/SRR3265401_2.fastq.gz Smudgeplot/
+ln -s /storage/data/03_Assembly/smudgeplot/SRR5678680_1.fastq.gz Smudgeplot/
+ln -s /storage/data/03_Assembly/smudgeplot/SRR5678680_2.fastq.gz Smudgeplot/
 cd Smudgeplot
 ```
 > Replace `{your_username}` with your own username on the server.
@@ -503,7 +503,7 @@ cd Smudgeplot
 Now create a k-mer database with FastK:
 
 ```
-FastK -v -t4 -k31 -M16 -T4 -NFastK_Table SRR3265401_1.fastq.gz SRR3265401_2.fastq.gz
+FastK -v -t4 -k31 -M16 -T4 -NFastK_Table SRR5678680_[12].fastq.gz
 ```
 > This command builds a 31-mer FastK database called `FastK_Table` from the two paired-end read files.
 > The example uses 4 threads and up to 16 GB of memory, following the Smudgeplot documentation.

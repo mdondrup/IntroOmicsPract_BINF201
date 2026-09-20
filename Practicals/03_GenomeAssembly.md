@@ -553,6 +553,8 @@ _Here, the dominant AB smudge indicates a diploid genome structure, consistent w
 
 _If multiple genome structures were present, you would expect additional smudges at different positions or ratios in the plot._
 _Those extra smudges could indicate polyploidy, segmental duplications, or more complex heterozygosity patterns._
+_If you want to see an example of a more complex smudge plot, you can repeat the steps above with the SRR3265401 run files._
+_These are from another S. cerevisiae isolate having higher ploidy._
 </details>
 
 ## Long Read Assembly

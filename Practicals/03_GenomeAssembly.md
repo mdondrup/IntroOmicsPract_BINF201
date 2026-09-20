@@ -442,17 +442,24 @@ Here, we will run BUSCO both on a general and a specific dataset:
 
 ```
 busco -m geno -c 2 -i spades_isolate/scaffolds.fasta --lineage bacteria -o busco_spades_bacteria
-busco -m geno -c 2 -i spades_isolate/scaffolds.fasta --lineage mycoplasmatales -o busco_spade_mycoplasmatales
+busco -m geno -c 2 -i spades_isolate/scaffolds.fasta --lineage mycoplasmatales -o busco_spades_mycoplasmatales
 ```
 > The `-m` option selects the running mode (here `geno` for genome; other options are `trans` (transcriptome) or `prot`(protein)).
 
-Have a look at the results, which are conveniently printed to the screen. 
-For this tutorial, we will only be looking at the proportion of complete BUSCOs (C).
+Review the results, which are printed to the screen. The summary data is also saved in a text file in the 
+output directories (-o option):
+
+```
+less busco_spades_bacteria/short_summary.specific.bacteria_odb12.2.busco_spades_bacteria.txt
+less busco_spades_mycoplasmatales/short_summary.specific.mycoplasmatales_odb12.2.busco_spades_mycoplasmatales.txt
+```
+
+For this tutorial, we will look only at the proportion of complete BUSCOs (C).
 
 <details>
 <summary>Compare the results for the bacteria dataset with the results for the Mycoplasmatales. Why could there be such a big difference?</summary>
 
-_BUSCO only finds 55% of conserved bacterial genes, but 97% of Mycoplasmatales genes._ 
+_BUSCO only finds 57.8% of conserved bacterial genes, but 95.6% of Mycoplasmatales genes._ 
 _This is because Mycoplasmoides species are very different from normal bacteria._
 _They have small genomes (+- 500-750 kbp) compared to most bacteria (which are mostly around 3-10 Mbp) and are known pathogens._
 _This means that these bacteria are very specialized and don't have many of the "general" genes that other bacteria have._ 

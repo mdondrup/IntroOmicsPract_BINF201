@@ -322,7 +322,7 @@ mv ncbi_dataset/data/GCF_000027325.1/GCF_000027325.1_ASM2732v1_genomic.fna ./ref
 rm -r ncbi_dataset/ README.md ref_genome.zip
 ```
 
-Then we can run Quast on all our assemblies (using the scaffolds file if available) using the following command:
+Then we can run QUAST on all our assemblies (using the scaffolds file if available) using the following command:
 
 ```
 quast -o assembly_QC -r ./reference.fasta spades_*/scaffolds.fasta Abyss_k*/*scaffolds.fa megahit_assembly/final.contigs.fa
@@ -336,7 +336,7 @@ Download and go through the report and answer the questions below:
 <details>
 <summary>Which of the assemblies gave the largest contig?</summary>
 
-_The ABYSS (k=75) assemblies: 521282 bp (you can find this in "Largest contig" in the "Statistics without reference" section._
+_The ABYSS (k=75) assembly: 521282 bp (you can find this in "Largest contig" in the "Statistics without reference" section._
 </details>
 
 <details>
@@ -360,30 +360,30 @@ _The N50 value can be found in the "Statistics without reference" section._
 
 _Yes: they are the same. This is because the largest contig (417kbp) takes up over half of the assembly (577kbp)._ 
 _Thus, half of the assembly is contained in the largest contig, which is 417kbp._
-_This explains also why the L50 is 1: you only need 1 contig to get at least 50% of the assembly._
+_This also explains why the L50 is 1: you only need 1 contig to get at least 50% of the assembly._
 </details>
 
 <details>
 <summary>In the "Genome statistics" section, there is a metric called NG50. How does this differ from N50? Which metric would you prefer to use to assess the quality of an assembly?</summary>
 
 _NG50 is relative to the reference genome size, while N50 is relative to the assembly size._ 
-_Using NG50 is preferred, because it avoids bias because of incomplete assemblies (see example below)._
+_Using NG50 is preferred because it avoids bias due to incomplete assemblies (see example below)._
 
 _Example: We have two assemblies of a genome:_
 
 - _AssemblyA has 12 contigs of each 250kbp (total size 2.5 Mbp)_
-- _AssemblyB has 2 contig of each 500kbp, and 25 contigs of each 10 kbp (total size 1.25 Mbp)_
+- _AssemblyB has 2 contigs of 500 kbp each, and 25 contigs of 10 kbp each (total size 1.25 Mbp)_
 
 _We know from previous studies that the genome of this species should be around 2.5 Mbp._
-_Using this information we can calculate the N50:_
+_Using this information, we can calculate the N50:_
 
 _The N50 of AssemblyA is 250kbp (half of the assembly is in contigs of size 250kbp or larger), the N50 of AssemblyB is 500kbp (half of the assembly is in contigs of size 500kbp or larger)._
 
-_Based on N50 alone it looks like AssemblyB is better (higher value). However, let's calculate NG50 now._ 
+_Based on N50 alone, it looks like AssemblyB is better (higher value). However, let's calculate NG50 now._ 
 _This means we have to check the size of the contigs that we need to have 50% of the reference genome (= 50% of 2.5Mbp = 1.25 Mbp)._
 
 _The NG50 of AssemblyA is still 250kbp (we can build an assembly of 1.25 Mbp using contigs of 250kbp or higher)._ 
-_However, the NG50 of AssemblyB is now 10 kbp: We need all contigs to get to an assembly of 1.25 Mbp, thus the NG50 is equal to the smalles contig (10 kbp)._
+_However, the NG50 of AssemblyB is now 10 kbp: We need all contigs to get to an assembly of 1.25 Mbp; thus, the NG50 is equal to the smallest contig (10 kbp)._
 
 _Thus, NG50 is a better metric to assess an assembly, but it requires you to have a reference genome, or to know how large the genome should be._
 </details>
@@ -391,40 +391,40 @@ _Thus, NG50 is a better metric to assess an assembly, but it requires you to hav
 <details>
 <summary>Which assembly covers the largest fraction of the reference genome?</summary>
 
-_The SPAdes (isolate) assembly: (98.988%). You can find this in the "Genome fraction" row under the "Genome statistics section"._
+_The SPAdes (isolate) assembly: (98.988%). You can find this in the "Genome fraction" row under the Genome statistics section._
 </details>
 
 <details>
 <summary>Which assembly shows the most/fewest mismatches and indels compared to the reference?</summary>
 
-_The SPAdes (isolate) assembly has the most mismatches and indels, the Abyss k31 the fewest._
+_The SPAdes (isolate) assembly has the most mismatches and indels; the Abyss k31 has the fewest._
 </details>
 
 <details>
 <summary>Given that the read quality was very good, what could be the reason for observing mismatches and indels in our assemblies, compared to the reference?</summary>
 
 _Because we are sequencing a different strain than the reference genome. Bacteria, and especially pathogenic bacteria, evolve very quickly._ 
-_Thus, if we sequence a bacterium of a certain species, it is very unlikely that we find the exact same genome as the reference._
-_The observed mismatches and indels are thus likely differences that evolved between the reference strain, and the strain that was sequenced in our dataset._
+_Thus, if we sequence a bacterium of a certain species, it is very unlikely that we find the same genome as the reference._
+_The observed mismatches and indels are thus likely differences that evolved between the reference strain and the strain that was sequenced in our dataset._
 </details>
 
 <details>
 <summary>Which of the genome assemblies do you think is best, and why?</summary>
 
-_Either one of the SPAdes assemblies, or the ABySS k75. The ABySS k75 assembly has a higher NG50, fewer total contigs, and the largest largest contig._ 
+_Either one of the SPAdes assemblies or the ABySS k75. The ABySS k75 assembly has a higher N50, fewer total contigs, and the largest contig._ 
 _However, SPAdes (isolate) captures a slightly higher fraction of the reference genome._
 </details>
 
 ## BUSCO analysis
 
-In this case we compared our assemblies to the reference genome to assess if we had a good assembly or not. 
+In this case, we compared our assemblies to the reference genome to assess if we had a good assembly or not. 
 Of course, when sequencing a new species, there will be no reference genome available to compare with, so it gets more difficult to properly assess assembly quality. 
 In that case, tools like [BUSCO](https://busco.ezlab.org/) come in handy. BUSCO is a tool that will try to detect the presence of conserved genes in your assembly.
-The BUSCO tool uses a database which contains sets of conserved genes (universal single-copy orthologs) which are present in the majority of species of a certain phylogenetic lineage (e.g. plants, primates, ...).
-By checking how much of the genes that should be in your assembly are actually in your assembly, you can have a rough idea of how complete your assembly is.
+The BUSCO tool uses a database that contains sets of conserved genes (universal single-copy orthologs) that are present in the majority of species of a certain phylogenetic lineage (e.g., plants, primates, ...).
+By checking how many of the genes that should be in your assembly are actually in your assembly, you can have a rough idea of how complete your assembly is.
 
-We will run BUSCO on the SPAdes-isolate assembly, the ABySS-k75 assembly, and the ABySS-k31 assembly. The most important step to running BUSCO is figuring out what lineage to use.
-BUSCO doesn't always run nicely with other programs, thus we had to install it in a separate environment (called "BUSCO"). So first activate the enviroment BUSCO (`micromamba activate BUSCO`).
+We will run BUSCO on the SPAdes-isolate assembly, the ABySS-k75 assembly, and the ABySS-k31 assembly. The most important step in running BUSCO is figuring out what lineage to use.
+BUSCO doesn't always run nicely with other programs, so we had to install it in a separate environment (called "BUSCO"). So first, activate the BUSCO environment (`micromamba activate BUSCO`).
 To get an overview of which lineages are available, you can run the following commands:
 
 ```
@@ -433,32 +433,32 @@ busco --list-datasets
 
 This will give you a list of lineages that you can use. But how do we find the correct lineage? There are 3 options:
 
-- You look up the taxonomy (e.g. on [NCBI taxonomy](https://www.ncbi.nlm.nih.gov/taxonomy), and check if any of the taxonomic levels is available in BUSCO.
+- You look up the taxonomy (e.g., on [NCBI taxonomy](https://www.ncbi.nlm.nih.gov/taxonomy), and check if any of the taxonomic levels are available in BUSCO.
 - Let BUSCO figure out the best lineage (using the `--auto-lineage` option).
-- Only use a general lineage (e.g. Bacteria or Eukaryota) 
+- Only use a general lineage (e.g., Bacteria or Eukaryota) 
 
-While the automatic lineage selection looks tempting, it is quite computationally heavy. In addition, it doesn't always select the best lineage, especially in taxa which are underrepresented in the underlying database.
+While the automatic lineage selection looks tempting, it is quite computationally heavy. In addition, it doesn't always select the best lineage, especially in taxa that are underrepresented in the underlying database.
 Here, we will run BUSCO both on a general and a specific dataset:
 
 ```
-busco -m geno -c 2 -i spades_isolate/scaffolds.fasta --lineage bacteria
-busco -m geno -c 2 -i spades_isolate/scaffolds.fasta --lineage mycoplasmatales
+busco -m geno -c 2 -i spades_isolate/scaffolds.fasta --lineage bacteria -o busco_spades_bacteria
+busco -m geno -c 2 -i spades_isolate/scaffolds.fasta --lineage mycoplasmatales -o busco_spade_mycoplasmatales
 ```
-> The `-m` option selects the running mode (here `geno` for genome, other options are `trans` (transcriptome) or `prot`(protein)).
+> The `-m` option selects the running mode (here `geno` for genome; other options are `trans` (transcriptome) or `prot`(protein)).
 
-Have a look at the results, which are handily printed to the screen. 
+Have a look at the results, which are conveniently printed to the screen. 
 For this tutorial, we will only be looking at the proportion of complete BUSCOs (C).
 
 <details>
-<summary>Compare the results for the bacteria dataset with the results for the mycoplasmatales. Why could there be such a big difference?</summary>
+<summary>Compare the results for the bacteria dataset with the results for the Mycoplasmatales. Why could there be such a big difference?</summary>
 
-_BUSCO only finds 55% of conserved bacterial genes, but 97% of mycoplasmatales genes._ 
+_BUSCO only finds 55% of conserved bacterial genes, but 97% of Mycoplasmatales genes._ 
 _This is because Mycoplasmoides species are very different from normal bacteria._
-_They have small genomes (+- 500-750 kbp) compared to most bacteria (who are mostly around 3-10 Mbp) and are known pathogens._
-_This means that these bacteria are very specialized, and don't have many of the "general" genes that other bacteria have._ 
+_They have small genomes (+- 500-750 kbp) compared to most bacteria (which are mostly around 3-10 Mbp) and are known pathogens._
+_This means that these bacteria are very specialized and don't have many of the "general" genes that other bacteria have._ 
 _However, if we only look at conserved genes within the Mycoplasmatales, it does have most genes that we expect._
 _This is because most species in the Mycoplasmatales are specialized in the same way, and thus share a lot more genes._
-_As a general rule, a BUSCO score >90% is considered good, >95% is considered very good._
+_As a general rule, a BUSCO score >90% is considered good, and >95% is considered very good._
 </details>
 
 Now try running BUSCO yourself on the two ABySS assemblies, but only using the `mycoplasmatales` lineage. 
@@ -542,7 +542,7 @@ _Here, the dominant AB smudge indicates a diploid genome structure, consistent w
 </details>
 
 <details>
-<summary>If the genome had a more complex structure, what would you expect to see in the smudgeplot?</summary>
+<summary>If the genome had a more complex structure, what would you expect to see in the smudge plot?</summary>
 
 _If multiple genome structures were present, you would expect additional smudges at different positions or ratios in the plot._
 _Those extra smudges could indicate polyploidy, segmental duplications, or more complex heterozygosity patterns._
@@ -553,15 +553,15 @@ _Those extra smudges could indicate polyploidy, segmental duplications, or more 
 Long read sequencing is becoming more and more common, even for small genomes. 
 The range of tools used for assembling long reads is different than the ones we have seen above.
 Many of these tools take a bit longer to run, so some patience is often required. 
-We will assemble Nanopore and PacBio reads from _Mycoplasma ovipneumoniae_ (or now classified as _Mesomycoplasma ovipneumoniae_).
+We will assemble Nanopore and PacBio reads from _Mycoplasma ovipneumoniae_ (now classified as _Mesomycoplasma ovipneumoniae_).
 We will use 3 different tools: [Canu](https://github.com/marbl/canu), [Flye](https://github.com/mikolmogorov/Flye), and [HifiAsm](https://github.com/chhylp123/hifiasm).
 
 First, we'll assemble the Nanopore reads using Canu. 
-Canu needs an estimation of the genome size to be able to calculate expected coverage. 
+Canu needs an estimate of the genome size to be able to calculate expected coverage. 
 Luckily, there are already [a lot of _M. ovipneumoniae_ genomes](https://www.ncbi.nlm.nih.gov/datasets/genome/?taxon=29562) sequenced.
 Based on these genome assemblies, we can say that the expected genome size is roughly 1.1 Mbp.
 
-Long read assembly usually takes more time than short read assembly, and has higher RAM requirements (depending on input size of course).
+Long-read assembly usually takes more time than short-read assembly and has higher RAM requirements (depending on input size, of course).
 To save you time, we have provided you with the Canu assembly (`MycOvi_Canu.fasta`), 
 the Flye assemblies (`MycOvi_Nano_Flye.fasta` and `MycOvi_HiFi_Flye.fasta`),
 and the HiFiAsm assembly (`MycOvi_HiFiasm.fasta`).
@@ -591,9 +591,9 @@ The Canu, Flye, and HiFiasm commands are included below in case you want to run 
 >mv hifiasm* MycOvi_HiFiAsm/
 >```
 > Since hifiasm doesn't output `fasta` directly, only `.gfa`, we use the `awk` command to convert from one to the other format.
-> GFA files contain multiple lines, one of them the sequence lines (starting with S).
+> GFA files contain multiple lines, one of them the sequence line (starting with S).
 > These sequence lines contain three columns/fields: the category (S for sequence in this case), the identifier (sequence name), and the sequence itself.
-> The `awk` command here will process all lines starting with `S` (`/^S/`), and will print ">" followed by the second field in the line (`print ">"$2`).
+> The `awk` command here will process all lines starting with `S` (`/^S/`) and will print ">" followed by the second field in the line (`print ">"$2`).
 > Then it will print the third field of the line on a new line (`print $3`).
 
 Run Quast on the 4 assemblies, and include the reference genome for this species.
@@ -617,7 +617,7 @@ _They also have many mismatches, unaligned regions, indels, ..._
 _This could be because:_ 
 
 - _Our assemblies are not good (e.g. not enough trimming, bad assembly parameters, ...)_
-- _Our assemblies are good, but divergent from the reference. Either our samples have been identified as the wrong species and we are aligning to the wrong reference, or this species is very diverse and there is a lot of genomic variation within the same species._
+- _Our assemblies are good, but divergent from the reference. Either our samples have been identified as the wrong species, and we are aligning to the wrong reference, or this species is very diverse, and there is a lot of genomic variation within the same species._
 </details>
 
 To check the completeness of the genome, run BUSCO on one assembly from the Nanopore reads and one assembly from the PacBio HiFi reads.
@@ -625,20 +625,20 @@ To check the completeness of the genome, run BUSCO on one assembly from the Nano
 <details>
 <summary>Do the BUSCO scores indicate a good assembly?</summary>
 
-- _For the HiFi reads: yes (99.4% completeness for mycoplasmatales)_
-- _For the Nanopore reads: no (18-26% completeness for mycoplasmatales)_
+- _For the HiFi reads: yes (99.4% completeness for Mycoplasmatales)_
+- _For the Nanopore reads: no (18-26% completeness for Mycoplasmatales)_
 
-_Thus, while both Nanopore and HiFi assemblies had very good assembly statistics, the Nanopore ones have very low BUSCO completeness score, while the HiFi showed very good BUSCO scores._
-_This is because the Nanopore reads used old Nanopore technology, that had error rates up to 15-20%. Assembling a genome using these reads alone leads to assemblies full of mitakes._
+_Thus, while both Nanopore and HiFi assemblies had very good assembly statistics, the Nanopore ones have very low BUSCO completeness scores, while the HiFi showed very good BUSCO scores._
+_This is because the Nanopore reads used old Nanopore technology, which had error rates up to 15-20%. Assembling a genome using these reads alone leads to assemblies full of mistakes._
 _Because of that, Nanopore was often combined with short reads to fix their mistakes._ 
-_The most recent Nanopore technologies have a significant lower error rate (<5%), and can now create good assemblies on its own as well._
+_The most recent Nanopore technologies have a significantly lower error rate (<5%) and can now create good assemblies on their own as well._
 </details>
 
 ## Cleanup
 
-Once you have performed all the analyses, it is time to do some cleanup. We will remove some files that we don't need anmyore, and will compress files to save space.
+Once you have performed all the analyses, it is time to do some cleanup. We will remove some files that we don't need anymore and will compress files to save space.
 
-Remove the `.zip` archives that FastQC creates (Once you have the multiqc report, they are not needed anymore):
+Remove the `.zip` archives that FastQC creates (Once you have the MultiQC report, they are not needed anymore):
 ```
 rm *zip
 ```
@@ -655,5 +655,5 @@ rm -r busco_downloads
 
 ## Analysis using full readsets
 
-In the long read assembly, we only used partial HiFi data, and did not properly pre-process the long reads (due to time and computational constraints).
-If you are curious about what the results would have looked like if we used all data, and properly processed it, you can have a look [here](../Other/Assembly_FullAnalysis.md).
+In the long read assembly, we only used partial HiFi data and did not properly pre-process the long reads (due to time and computational constraints).
+If you are curious about what the results would have looked like if we used all data and properly processed it, you can have a look [here](../Other/Assembly_FullAnalysis.md).

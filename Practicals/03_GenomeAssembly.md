@@ -271,7 +271,7 @@ mv abyss_k75* Abyss_k75
 > The `k` option sets the _k_-mer length, and the `B` option sets the size of the Bloom filter (a specific data structure ABySS uses to store the De Bruijn Graph).
 
 Once both assemblies are finished, the final contig files will be stored in the output directory as `abyss_kXX-contigs.fa`. 
-Use `grep` again to find the number of contigs and scaffolds in the two ABySS assemblies.
+Use `seqkit stats` again to find the number of contigs and scaffolds in the two ABySS assemblies.
 
 <details>
 <summary>Which of the two ABySS assemblies gives the most contigs? Do you think this is better or worse?</summary>

@@ -120,6 +120,11 @@ Then, run FastQC on all four files, download the files, and look at the reports.
 
 > If you have problems downloading the files, you can find the relevant files in [this folder](../Outputs).
 
+```
+scp -r -i ~/.ssh/NREC_key "student@binf201.ddns.net:/storage/student/Practical3/*.html" ./Practical3
+```
+Replace "student with your user name"
+
 <details>
 <summary>How many reads are in this dataset, and how long are the reads?</summary>
 

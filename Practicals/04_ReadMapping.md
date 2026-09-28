@@ -1,17 +1,20 @@
 # Practical 4 – Read Mapping
 
-In this practical we will map different kind of sequencing reads from different types of experiments to the _Arabidopsis thaliana_ (thale cress) reference genome using different mappers.
+In this practical, we will map sequencing reads from different experiment types to the _Arabidopsis thaliana_ (thale cress) reference genome using different mappers.
 
 ## Software installation and data retrieval
 
 In this tutorial, we will have a look at the following mapping and related software:
 
-- [Smalt](https://www.sanger.ac.uk/tool/smalt/) - A relatively fast short read aligner for DNA
-- [BWA-Mem2](https://github.com/bwa-mem2/bwa-mem2) - An popular all-purpose aligner
-- [HiSat2](https://daehwankimlab.github.io/hisat2/) - A fast and sensitive aligner for RNA (but can align DNA as well)
-- [STAR](https://github.com/alexdobin/STAR) - A very popular RNA-seq aligner
-- [Minimap2](https://github.com/lh3/minimap2) - A versatile aligner for sequences of any length, both DNA and RNA (but mainly used for long read alignment)
+- [Smalt](https://www.sanger.ac.uk/tool/smalt/) - A relatively fast short read aligner for DNA (hash-map of k-mers)
+- [BWA-Mem2](https://github.com/bwa-mem2/bwa-mem2) - An popular all-purpose aligner (BWT, FM-index)
+- [HiSat2](https://daehwankimlab.github.io/hisat2/) - A fast and sensitive aligner for RNA (but can align DNA as well) (BWT/FM-index adapted for graphs and local regions)
+- [STAR](https://github.com/alexdobin/STAR) - A very popular RNA-seq aligner (uncompressed suffix arrays)
+- [Minimap2](https://github.com/lh3/minimap2) - A versatile aligner for sequences of any length, both DNA and RNA (hash-map of minimizers)
 - [samtools](https://github.com/samtools/samtools) - A very handy toolkit for handling alignment data (`.sam` and `.bam` files) 
+
+
+
 
 ### For students using NREC
 
@@ -22,7 +25,7 @@ Before starting the practical, make sure to activate the correct environment bef
 Then navigate to your work folder.
 We will not work on the home folder (`~` or `/home/{your_username}`) because there is only limited storage space (20Gb).
 You will be working on a mounted drive (200Gb) which is located in `/storage`.
-All students on NREC will have their own folder `/storage/{your_username}` (e.g. `/storage/brdan` if your username is "brdan").
+All students on NREC will have their own folder `/storage/{your_username}` (e.g., `/storage/brdan` if your username is "brdan").
 
 First of all, go to your work folder:
 

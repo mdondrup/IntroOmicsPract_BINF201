@@ -6,11 +6,11 @@ In this practical we will map different kind of sequencing reads from different 
 
 In this tutorial, we will have a look at the following mapping and related software:
 
-- [Smalt](https://www.sanger.ac.uk/tool/smalt/) - A relatively fast short read aligner for DNA
-- [BWA-Mem2](https://github.com/bwa-mem2/bwa-mem2) - An popular all-purpose aligner
-- [HiSat2](https://daehwankimlab.github.io/hisat2/) - A fast and sensitive aligner for RNA (but can align DNA as well)
-- [STAR](https://github.com/alexdobin/STAR) - A very popular RNA-seq aligner
-- [Minimap2](https://github.com/lh3/minimap2) - A versatile aligner for sequences of any length, both DNA and RNA (but mainly used for long read alignment)
+- [Smalt](https://www.sanger.ac.uk/tool/smalt/) - A relatively fast short read aligner for DNA (using hash table of k-mers)
+- [BWA-Mem2](https://github.com/bwa-mem2/bwa-mem2) - An popular all-purpose aligner (BWT, FM-index)
+- [HiSat2](https://daehwankimlab.github.io/hisat2/) - A fast and sensitive aligner for RNA (BWT, hierarchical graph FM-index)
+- [STAR](https://github.com/alexdobin/STAR) - A very popular RNA-seq aligner (uncompressed SuffixArray)
+- [Minimap2](https://github.com/lh3/minimap2) - A versatile aligner for sequences of any length, both DNA and RNA (hash table of minimizers)
 - [samtools](https://github.com/samtools/samtools) - A very handy toolkit for handling alignment data (`.sam` and `.bam` files) 
 
 ### For students using NREC

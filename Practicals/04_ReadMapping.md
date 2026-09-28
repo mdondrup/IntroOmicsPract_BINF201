@@ -173,7 +173,7 @@ We will continue working on the `.filt` files for the rest of the practical.
 ## Reference genome
 
 If we want to map reads, we need to map them to something. 
-We will map the reads to the _Arabidopsis thaliana_ reference genome (TAIR10.1). To download the refernce genome, run:
+We will map the reads to the _Arabidopsis thaliana_ reference genome (TAIR10.1). To download the reference genome, run:
 
 ```
 wget -O TAIR.zip "https://api.ncbi.nlm.nih.gov/datasets/v2alpha/genome/accession/GCF_000001735.4/download?include_annotation_type=GENOME_FASTA&include_annotation_type=GENOME_GTF"
@@ -185,11 +185,11 @@ rm -r TAIR.zip ncbi_dataset/ README.md
 
 ## Short read genomic mappers
 
-First we will have a look at short read genomic mappers. 
+First, we will have a look at short read genomic mappers. 
 We will compare 3 mappers: [Smalt](https://www.sanger.ac.uk/tool/smalt/), [BWA-Mem2](https://github.com/bwa-mem2/bwa-mem2), and [HiSat2](https://daehwankimlab.github.io/hisat2/).
 We will start by mapping the normal Illumina Paired-end reads using the three mappers, and see which one is the fastest.
 
-Let's start by using Smalt. The first step of mapping, is indexing the genome. 
+Let's start by using Smalt. The first step of mapping is indexing the genome. 
 This will make it easier to search the genome for positions where the reads map.
 Make sure to activate the Mapping environment: `conda activate Mapping` before running the commands.
 
@@ -223,13 +223,13 @@ samtools view -bS DNA_PE_hisat.sam | samtools sort > DNA_PE_hisat.bam && rm DNA_
 >This is because our files end in `.filt` and not in `.fastq`. Don't worry, the software will still run as it should.
 
 <details>
-<summary>Which of the mappers ran the fastest, accurding to the "real" time?</summary>
+<summary>Which of the mappers ran the fastest, according to the "real" time?</summary>
 
 _In my case, the "real" times were 2m46 for HiSat, 3m16 for BWA-mem, and 6m16 for smalt. However, your actual running times can differ depending on server load._
-_Ideally, you perform the same taks multiple times and take the average run time. This is outside the scope of this course however._
-_The "real" time is what we call "wall clock time". It is basically the difference in real time between when the command launched, and when it finished._
+_Ideally, you perform the same task multiple times and take the average run time. This is outside the scope of this course, however._
+_The "real" time is what we call "wall clock time". It is basically the difference in real time between when the command launched and when it finished._
 _The "user" time is the so-called CPU time (total time the processors were running) of the user process._
-_The "sys" time is the CPU time spend "outside" of the user process (i.e. communicating and coordinating between the different threads)._
+_The "sys" time is the CPU time spent "outside" of the user process (i.e., communicating and coordinating between the different threads)._
 </details>
 
 Running time is one parameter to consider, but we also have to consider the mapping results. We will gather some statistics from the mapping files (`.bam`).
@@ -244,15 +244,15 @@ echo "Number of reads mapped:" && samtools view -c -F 260 $map;
 echo ""
 done
 ```
-> Samtools depth will show us for every base how much reads cover that base. 
+> Samtools depth will show us for every base, how many reads cover that base. 
 > With the `awk` command, we will go over every line (= base) and at every line increase `c` with 1 (`c++`), 
 > and increase `s` with the value of the third column (`s+=$3`)(the third column containins the coverage for that base).
 > At the end, we will calculate the average coverage as the total coverage (`s`), divided by the total number of bases (`c`): `print s/c`.
-> In the second command we will again count all the bases with `c++`, 
+> In the second command, we will again count all the bases with `c++`, 
 > and each time we have a base which has a coverage (stored in the 3rd column) higher than zero, we will add 1 to the total (`if ($3>0) total+=1`). 
-> In the end we will calculate how much of the genome is covered by dividing the number of bases with coverage > 0 (`total`) by the total number of bases (`c`): `print (total/c)*100`. 
+> In the end, we will calculate how much of the genome is covered by dividing the number of bases with coverage > 0 (`total`) by the total number of bases (`c`): `print (total/c)*100`. 
 > We multiply by 100 to get the result in percentage instead of proportion.
-> In the third command we count all reads in the bam (`-c`), but exclude (`-F 260`) unmapped & secondary alignments.
+> In the third command we count all reads in the BAM (`-c`), but exclude (`-F 260`) unmapped & secondary alignments.
 > If you want to know more about what these commands do exactly, you can have a look [here](https://sarahpenir.github.io/bioinformatics/awk/calculating-mapping-stats-from-a-bam-file-using-samtools-and-awk/) and [here](https://www.metagenomics.wiki/tools/samtools/number-of-reads-in-bam-file).
 
 <details>
@@ -266,11 +266,11 @@ _However, the differences are relatively small._
 <summary>Given that we have sequences from the whole genome, why is only 55-60% of the genome covered?</summary>
 
 _We only used a subset of a normal sequencing run (1M reads in the case of short reads)._
-_Since we have two read files (forward & reverse), we have 2 million reads of 100bp each (= 200M bases in total)._
+_Since we have two read files (forward & reverse), we have 2 million reads of 100bp each (= 200 M bases in total)._
 _Given that the A. thaliana genome is +- 136 Mbp large, an average coverage of 1.45 makes sense._
-_However, since reads generally map randomly to the genome (if doing whole-genome sequencing), it is likely that a large part of reads will map to overlapping regions of the genome while others part of the genome will have no mapped reads._
+_However, since reads generally map randomly to the genome (if doing whole-genome sequencing), it is likely that a large part of reads will map to overlapping regions of the genome while other parts of the genome will have no mapped reads._
 </details>
->Note: Here we have used the mappers using the default settings. All three mappers can be finetuned to improve mapping performance depending on the situation.
+>Note: Here we have used the mappers using the default settings. All three mappers can be fine-tuned to improve mapping performance depending on the situation.
 
 ## ChIP-seq mapping
 
@@ -294,15 +294,15 @@ echo "Number of mapped reads:" && samtools view -c -F 260 CHIP_smalt.bam
 ```
 
 We see that an even smaller fraction of the genome is covered (+- 46%) and we have a lower average coverage (+- 0.79), despite having the same amount of reads.
-This is because ChIP-seq has a selection step where we only select parts of the genome to be sequenced (e.g. where a certain transcription factor binds).
-Thus, most reads will be derived from these regions, and less reads will map to the other regions, lowering the overal covered fraction of the genome.
+This is because ChIP-seq has a selection step where we only select parts of the genome to be sequenced (e.g., where a certain transcription factor binds).
+Thus, most reads will be derived from these regions, and fewer reads will map to the other regions, lowering the overall covered fraction of the genome.
  
 ## Long Read Mapping
 
 In this part, we will map both NanoPore and PacBio reads to the genome. 
 Long read mappers use different approaches for mapping, as in general we are dealing with fewer, but longer reads. 
 Many long-read mappers use approaches similar to those used for genome-to-genome alignment. 
-One such mapper is [minimap2](https://github.com/lh3/minimap2) which can be used for long-read mapping but can also be used to align transcriptomes or whole genomes to a reference. 
+One such mapper is [minimap2](https://github.com/lh3/minimap2), which can be used for long-read mapping but can also be used to align transcriptomes or whole genomes to a reference. 
 
 In contrast to the short-read mappers we used, minimap2 creates the index as part of the mapping pipeline. 
 We can thus go directly to mapping the reads:
@@ -328,7 +328,7 @@ done
 <details>
 <summary>Despite having a lot fewer reads (10 thousand instead of 1 million), we have similar mapping statistics (coverage and genome fraction) for the HiFi reads as the short read mappings. Why?</summary>
 
-_Because the reads are longer. As such, we need a lot fewer reads to have the same amount of bases to cover a certain proportion of the genome._
+_Because the reads are longer. As such, we need a lot fewer reads to have the same number of bases to cover a certain proportion of the genome._
 _In other words, you need fewer reads to get the same amount of total bases with longer reads._
 </details>
 
@@ -341,10 +341,10 @@ _Alternatively, it could be that the specimen sequenced using Nanopore is more d
 
 ## RNA-seq Mapping
 
-Now that we have mapped both short an long DNA reads, we’ll have a look at mapping RNA-seq reads. 
-Mapping RNA-data is more difficult than mapping DNA data, because of transcript splicing.
+Now that we have mapped both short and long DNA reads, we’ll have a look at mapping RNA-seq reads. 
+Mapping RNA data is more difficult than mapping DNA data, because of transcript splicing.
 In RNA-seq we normally sequence mature transcripts, which are already spliced (i.e. introns removed).
-This means that parts of the transcript will map to different part of the genomes (exons), with introns inbetween.
+This means that parts of the transcript will map to different parts of the genome (exons), with introns inbetween.
 If we want to map RNA-seq reads to a reference, we need so-called "splice-aware" aligners.
 Here we'll have a look at HiSat2 and Minimap2 again, but also at the very popular [STAR](https://github.com/alexdobin/STAR) aligner.
 
@@ -359,7 +359,7 @@ samtools view -bS RNA_PE_hisat.sam | samtools sort > RNA_PE_hisat.bam && rm RNA_
 
 However, since now are doings "splice-aware" alignment, we could help our mapper by adding information about the splice sites to the genome index.
 Since we have a reference annotation (the `.gtf` file we downloaded earlier), we can extract the information about where the introns, exons, and splice sites are.
-Then, we can use that information to create a new genome index which takes this information into account.
+Then, we can use that information to create a new genome index that takes this information into account.
 
 ```
 hisat2_extract_exons.py TAIR.gtf > TAIR.exons
@@ -408,8 +408,8 @@ done
 
 _Not really. The mapping statistics are highly similar._
 
-_Also note the low proportion of the genome covered. This is of course since we are only mapping reads to exons, which are only a minor part of the genome._
-_Most eukaryotic genomes mainly consist of non-coding sequences which will not be covered by RNA-seq data (as only coding transcripts (= mRNA) is sequenced)._
+_Also note the low proportion of the genome covered. This is because we are only mapping reads to exons, which are only a minor part of the genome._
+_Most eukaryotic genomes mainly consist of non-coding sequences which will not be covered by RNA-seq data (as only coding transcripts (= mRNA) are sequenced)._
 </details>
 
 STAR is a very popular RNA-seq mapper. Let's try using it as well.
@@ -481,18 +481,18 @@ echo "Number of mapped reads:" && samtools view -c -F 260 $map"
 <summary>How are the mapping results compared to the short reads?</summary>
 
 _Not so good. All statistics are significantly lower. This is because the Nanopore reads have a lot of errors, leading to difficulties aligning all reads._ 
-_Additionally, we have fewer total bases in the Nanopore set than in the short read set (83.5M bp vs 200 Mbp; before filtering), leading to lower coverage._
-_Lastly, the experimental setup could also have played a role. Depending on the condition in which RNA was extract, a different number of genes could be expressed, which can lead to reads mapping to fewer regions of the genome._
+_Additionally, we have fewer total bases in the Nanopore set than in the short read set (83.5 Mbp vs 200 Mbp; before filtering), leading to lower coverage._
+_Lastly, the experimental setup could also have played a role. Depending on the condition in which RNA was extracted, a different number of genes could be expressed, which can lead to reads mapping to fewer regions of the genome._
 </details>
 
 ## Using the wrong tool
 
 Picking the right tool for the job is important in bioinformatics. 
-In the above parts we used different mappers depending on the input data.
-In this part we will try to have a look at what happens when we use the wrong tool for the job, and what would happen if we map reads from a different species.
+Earlier, we used different mappers depending on the input data.
+In this part, we will try to have a look at what happens when we use the wrong tool for the job, and what would happen if we map reads from a different species.
 
-We'll start by trying to see what would happen if we use a splice-aware aligner on DNA-reads. 
-We will map the PE DNA reads to genome using STAR.
+We'll start by trying to see what would happen if we use a splice-aware aligner on DNA reads. 
+We will map the PE DNA reads to the genome using STAR.
 Since we already created the genome index with splice junctions before, we don't need to redo that.
 
 ```
@@ -509,10 +509,10 @@ echo "Number of mapped reads:" && samtools view -c -F 260 $map"
 <details>
 <summary>How are the mapping statistics? Do they look normal/similar to the STAR RNA mapping or smalt/bwa-mem/hisat DNA mapping?</summary>
 
-_They look quite good, and are very similar to the normal DNA mapping._
+_They look quite good and are very similar to the normal DNA mapping._
 </details>
 
-Now we will try the opposite. We will try to map the paired RNA-seq reads using a genomic mapper (in this case smalt). 
+Now we will try the opposite. We will try to map the paired RNA-seq reads using a genomic mapper (in this case, smalt). 
 
 <details>
 <summary>Do you think this will work very well? What kind of problems do you expect?</summary>
@@ -521,7 +521,7 @@ _It will likely not work very well, since part of the reads should map to differ
 _We will either have few mapped reads, or reads that are only partially mapped (e.g. to only one of the exons)._
 </details>
 
-Again we already have the index ready, so we can just do the mapping:
+Again, we already have the index ready, so we can just do the mapping:
 
 ```
 smalt map -n 2 TAIR_smalt.index Atha_RNA_PE_F.fastq.filt Atha_RNA_PE_R.fastq.filt \
@@ -580,9 +580,9 @@ done
 _Mapping using the short read option has better statistics: higher coverage, more of the genome covered, and more reads mapped._
 </details>
 
-Lastly, we'll have a quick look on what happens if we map reads from a different species. 
+Lastly, we'll have a quick look at what happens if we map reads from a different species. 
 We'll map some _Brassica napes_ reads to the _A. thaliana_ genome and see what happens.
-Pick one of the short reads mappers we have used, and try mapping the _B. napes_ reads (starting with `Bnap`) to `TAIR.fasta`, 
+Pick one of the short-read mappers we have used, and try mapping the _B. napes_ reads (starting with `Bnap`) to `TAIR.fasta`, 
 and compare the statistics to the one using _A. thaliana_ reads. 
 
 <details>
@@ -613,10 +613,10 @@ Now we have to download both the `bam` files and their indexes to our local pc (
 Once you have downloaded the files, you can launch IGV.
 Since _A. thaliana_ is a widely used model species, IGV has the TAIR genome included.
 You can open that genome by going to "Genomes" -> "Select hosted genome", and select _A. thaliana_ from the list.
-This will load both the genome, and the annotations. You should now see the 5 chromosomes on the top of your view.
+This will load both the genome, and the annotations. You should now see the 5 chromosomes at the top of your view.
 
 We will start by loading the 3 DNA paired-end read mappings we started with (smalt, bwa-mem, and hisat2). 
-You can load a `.bam` file by going to "File" -> "Load from file", and selecting the `.bam` files you want to add.
+You can load a `.bam` file by going to "File" -> "Load from file" and selecting the `.bam` files you want to add.
 >As mentioned before, to properly display a `bam` file, it needs to be sorted, and there needs to be an associated index file (`.bai`) in the folder.
 >If for some reason you lost the index file, or need to re-sort the `bam` file, you can go to "Tools" -> "Run igvtools" to sort and/or index a `.bam` file.
 
@@ -626,8 +626,8 @@ Because we are currently viewing the whole genome, we can't actually see the map
 Select chromosome 3 by selecting it from the gray dropdown menu next to the name of the genome. Then click on the "+" button on the top right to zoom in until the blue marker is in the blue zone.
 Now you should be able to see the mapping data. Zoom in until you see mapping data for all three `bam` files.
 
-Each `bam` file displays two main "tracks": the coverage, and the mappings. The hisat mapping also shows junctions, but this is not relevant for DNA-mapping.
-The coverage is basically a histogram displaying how many reads cover a certain position. As you can see, the regions where more reads map, have a higher coverage.
+Each `bam` file displays two main "tracks": the coverage and the mappings. The hisat mapping also shows junctions, but this is not relevant for DNA-mapping.
+The coverage is basically a histogram displaying how many reads cover a certain position. As you can see, the regions where more reads map have a higher coverage.
 You can scroll through the chromosme by clicking and holding down the mouse botton while moving left/right. 
 
 <details>
@@ -642,7 +642,7 @@ Let's try looking at the mitochondria. Select it in the chromosome selection pan
 <details>
 <summary>Why don't we observe any mapping to the mitochondrial genome?</summary>
 
-_One explanation could be that we didn't have the mitochondrial sequence in our reference. However, if you check the contig names of your refernce (`grep ">" TAIR.fasta`),_
+_One explanation could be that we didn't have the mitochondrial sequence in our reference. However, if you check the contig names of your reference genome (`grep ">" TAIR.fasta`),_
 _you will see that the mitochondrial sequence is there._
 _It could be that there were no mitochondrial reads in our samples, or that there are slight differences in the reference genome we used (TAIR10.1) and the genome in IGV (TAIR10)._
 </details>
@@ -657,26 +657,26 @@ _This is because the DNA is likely derived from leaf tissue, which contains a lo
 _When extracting DNA, a lot of it is thus derived from the chloroplast, leading to high coverage there._
 </details>
 
-We see some colored bars on some of the reads. Try zooming in to the maximal level to figure out what they are.
+We see some colored bars on some of the reads. Try zooming in to the maximum level to figure out what they are.
 
 <details>
 <summary>What do the colors on the reads mean? (the bars on the reads, not reads that are fully coloured)</summary>
 
-_They indicate differences in the reads compared to the refernce sequence (visible on the bottom). Each color represents a different base._
+_They indicate differences in the reads compared to the reference sequence (visible on the bottom). Each color represents a different base._
 </details>
->Some reads also are fully colored in a certain color. These colorings are based on pairing of reads and insert sizes, but are not relevant here.
+>Some reads are also fully colored in a certain color. These colorings are based on pairing of reads and insert sizes, but are not relevant here.
 
 Since we have mapped paired-end reads, we could have a look at the pairings. Right-click on the read tracks title, and activate the "view as pairs" option.
-You should now see that reads coming from the same pair are linked. You can also notice that some pairs overlap, because the insert was smaller than the total size of the reads.
+You should now see that reads coming from the same pair are linked. You can also notice that some pairs overlap because the insert was smaller than the total size of the reads.
 
-Let's have a look at some of the other mappings. You can delete the tracks by right clicking and selecting "delete track". 
+Let's have a look at some of the other mappings. You can delete the tracks by right-clicking and selecting "delete track". 
 Then load the two long read mappings (DNA_Nano & DNA_HiFi).
-Select the chloroplast again. You should be able to immediatly see the mappings.
+Select the chloroplast again. You should be able to immediately see the mappings.
 
 <details>
-<summary>What obvious difference can you immediatly see between both read sets?</summary>
+<summary>What obvious difference can you immediately see between both read sets?</summary>
 
-_There are a lot more differences between the Nanopore reads and the reference than between the HiFi reads and the refrence._
+_There are a lot more differences between the Nanopore reads and the reference than between the HiFi reads and the reference._
 </details>
 
 <details>
@@ -688,10 +688,10 @@ _Indels (insertions and deletions), visualized by the black stripes (deletions) 
 <details>
 <summary>Zoom in all the way and scroll through the chloroplast genome. Look specifically for regions where many of the Nanopore reads have a deletion. Do you see a pattern in where these deletion hotspots occur?</summary>
 
-_The  seem to mainly occur in so-called "homopolymer" stretches: regions where the same base is repeated multiple times (e.g._ `TTTTTTTTTT`_)_
+_They  seem to mainly occur in so-called "homopolymer" stretches: regions where the same base is repeated multiple times (e.g._ `TTTTTTTTTT`_)_
 </details>
 
-Remove the tracks again, and now load the short read RNA files (RNA_PE_hisat, RNA_PE_hisat_splice, and RNA_PE_STAR). 
+Remove the tracks again, and now load the short-read RNA files (RNA_PE_hisat, RNA_PE_hisat_splice, and RNA_PE_STAR). 
 Once loaded, use the search bar to go to gene "AT4G30600".
 
 <details>
@@ -704,15 +704,15 @@ _If you look closely, you should see that these arches correspond to the introns
 <details>
 <summary>Do you see differences in the hisat mapping when using the normal index compared to the index where we added splice junctions?</summary>
 
-_No. The mappings seem very similar. This does not mean however that adding splice junctions to the index is useless._
+_No. The mappings seem very similar. This does not mean, however, that adding splice junctions to the index is useless._
 _In genes with complicated gene structures, adding splice junctions can help with mapping more reads correctly._
 </details>
 
 <details>
 <summary>Zoom out a couple of times. Do you see a pattern in where in the genome the reads map?</summary>
 
-_Yes, the genes map almost exclusively to genes (blue boxes at the bottom of the screen)._
-_This is of course logical, since the reads are derived from RNA-transcripts, which can only be generated from genes._
+_Yes, the reads map almost exclusively to genes (blue boxes at the bottom of the screen)._
+_This is logical, since the reads are derived from RNA-transcripts, which can only be generated from genes._
 </details>
 
 <details>
@@ -722,28 +722,28 @@ _This likely means that the gene is not expressed in the conditions of the exper
 </details>
 
 <details>
-<summary>Go to gene "AT4G36850.1" and look at the STAR alignments. What difference can you see from the hisat2 alignments?</summary>
+<summary>Go to gene "AT4G36850.1" and look at the STAR alignments. What difference can you see from the HISAT2 alignments?</summary>
 
-_You should see some long lines on the junction track, and on the first lines of the reads track._
-_These indicate very long splice junctions, where parts of the reads are mapped to the different genes._
+_You should see some long lines on the junction track and on the first lines of the reads track._
+_These indicate very long splice junctions, where parts of the reads are mapped to different genes._
 _This problem could be resolved by specifying a maximal intron length when running STAR._
 </details>
 
-Remove the STAR tracks, and one of the two hisat mappings. Then load the RNA_NanoPore mapping, and go back to gene "AT4G09150.1".
+Remove the STAR tracks, and one of the two HISAT mappings. Then load the RNA_NanoPore mapping, and go back to gene "AT4G09150.1".
 
 <details>
-<summary>Look at the first read in the Nanopore mapping, and compare to the reads in the hisat mapping. What benefit does Nanopore have here?</summary>
+<summary>Look at the first read in the Nanopore mapping, and compare to the reads in the HISAT mapping. What benefit does Nanopore have here?</summary>
 
 _Higher read length. The Nanopore read covers the whole gene, making it easier to identify all the splice junctions._
-_With the short reads, we have a lot more reads, but do not manage to cover the whole gene, and don't manage to identify all the splice junctions._
+_With short reads, we have a lot more reads, but do not manage to cover the whole gene, and we do not manage to identify all the splice junctions._
 _Long reads also makes it a lot easier to identify alternative splicing events._
 </details>
 
 Lastly, let us have a look at our faulty mappings (when using the wrong tool). Delete all tracks again, and load the Bnap_TAIR and DNA_PE_smalt files.
-Pick a chromosome (not the chloroplast), zoom in and browse a bit. Try activating read-pair mode on both of them (right click on a track to activate it).
+Pick a chromosome (not the chloroplast), zoom in and browse a bit. Try activating read-pair mode on both of them (right-click on a track to activate it).
 
 <details>
-<summary>What are the main difference between both read sets?</summary>
+<summary>What are the main differences between both read sets?</summary>
 
 _There are way fewer mapped reads in the Bnap dataset, and most reads do not pair with another read (hence the different colours they have)._
 _This is to be expected as we are mapping reads from another genome, and most of the reads will not map, or have a bad mapping._
@@ -763,12 +763,12 @@ Lastly, load the RNA_smalt and the RNA_PE_hisat_splice files. Go back to gene "A
 <details>
 <summary>What happens when using a DNA mapper on RNA reads?</summary>
 
-_We still see that many of the reads map, but they are never split. From the coverage graph we can still see where the introns are, but we have no reads covering the junctions._
+_We still see that many of the reads map, but they are never split. From the coverage graph, we can still see where the introns are, but we have no reads covering the junctions._
 </details>
  
 ## Cleanup
 
-Once you have performed all the analyses, it is time to do some cleanup. We will remove some files that we don't need anmyore, and will compress files to save space.
+Once you have performed all the analyses, it is time to do some cleanup. We will remove some files that we don't need anymore, and will compress files to save space.
 
 Remove the `.zip` archives that FastQC creates (once you have the multiqc report, they are not needed anymore):
 ```

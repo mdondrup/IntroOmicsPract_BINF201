@@ -439,7 +439,7 @@ Below we provide the commands in case you are interested in running this yoursel
 >```
 >Trinity --left RNA_PE_F_Chr15.fastq --right RNA_PE_R_Chr15.fastq --seqType fq --CPU 2 --max_memory 20G --output PE_trinity
 >seqtk seq -a RNA_HiFi_Chr15.fastq > RNA_HiFi_Chr15.fasta
->Trinity --left RNA_PE_F_Chr15.fastq --right RNA_PE_R_Chr15.fastq --long_reads RNA_HiFi_Chr15.fastq --seqType fq --CPU 2 --max_memory 20G --output PE_HiFi_trinity
+>Trinity --left RNA_PE_F_Chr15.fastq --right RNA_PE_R_Chr15.fastq --long_reads RNA_HiFi_Chr15.fasta --seqType fq --CPU 2 --max_memory 20G --output PE_HiFi_trinity
 >```
 > The assembled transcripts will be called `Trinity.fasta` in the output folder
 

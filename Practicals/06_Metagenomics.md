@@ -197,7 +197,7 @@ We have two short-read samples (Plant & Stool), and one long-read one (Sea).
 As usual, we'll start by performing quality control of our sequences.
 Since our read sets are a bit larger in size, FastQC would take a while to run on NREC.
 We have thus provided the FastQC reports with the data on NREC.
-Download, and have a look at the QC reports.
+Download and have a look at the QC reports.
 
 > If you have problems downloading the files, you can find the relevant files in [this folder](../Outputs).
 
@@ -382,19 +382,20 @@ For your information, the commands used for running the assemblies can be found 
 >```
 
 The reason we provided the assembly graphs (`.gfa`) is because we want to take a look at them.
-A good tool to visualise the structure of our assembly graphs is [Bandage](http://rrwick.github.io/Bandage/). 
-Install the software, and then download the assembly graph from both assemblies (you might have to rename to avoid overwriting them when downloading).
-> If you have problems downloading the files, you can find the relevant files on [Zenodo](https://zenodo.org/records/17120797).
+A good tool to visualise the structure of our assembly graphs is [BandageJS](https://jbrowse.org/demos/bandagejs/). 
 
-Start the Bandage software, and open the `.gfa` files of both assemblies. 
-Once opened, click on the “draw graph” button to draw the bandage graph.
+There's other software like the original [Bandage](https://github.com/rrwick/Bandage) and [BandageNG](https://github.com/asl/BandageNG) software, but a lot of these is poorly maintained now and cannot be easily downloaded or installed due to missing certificates. If you need to inspect larger assembly graphs, you may want to build BandageNG from source.
+
+> If you have problems downloading the graph files, you can find the relevant files on [Zenodo](https://zenodo.org/records/17120797).
+
+Go the [BandageJS](https://jbrowse.org/demos/bandagejs/) demo page and upload the `.gfa` files of both assemblies. The stools sample will trigger a warning because a large number of nodes. Click "render anyway". 
 You can draw a frame over a collection of lines (contigs), and see their total length on the right side of the screen.
 
 <details>
 <summary>How many large clusters do you see? What do they correspond to according to you?</summary>
 
-- _Stool sample: There is one big connected cluster (total size +- 14 Mbp). This is likely one bacterial genome (or two closely related).Otheriwse we have smaller components (100kb and lower). These are likely contigs from different other species which are present in lower amounts in the sample._
-- _Plant sample: There is also one big connected cluster (total size +- 9Mbp). Again, this is likely one bacterial genomes. The other components are similar, but there are less short pieces in this sample._
+- _Stool sample: There is one big connected cluster (total size +- 14 Mbp). This is likely one bacterial genome (or two closely related). Otherwise, we have smaller components (100kb and lower). These are likely contigs from different species that are present in lower amounts in the sample._
+- _Plant sample: There is also one big connected cluster (total size +- 9Mbp). Again, this is likely one bacterial genome. The other components are similar, but there are less short pieces in this sample._
 </details>
 
 Now let's assemble the long reads, using the metagenomic mode of Flye:
@@ -409,7 +410,7 @@ Download the assembly graph (`assembly_graph.gfa` in the `Sea_metaFlye` folder) 
 <details>
 <summary>How is the assembly graph similar/different from the short-read assemblies?</summary>
 
-_We have a lot fewer components, and all components are one contig and non-connected. There is no large clusters, and the contigs are quite small._
+_We have a lot fewer components, and all components are one contig and non-connected. There are no large clusters, and the contigs are quite small._
 </details>
 
 ### Metagenome binning

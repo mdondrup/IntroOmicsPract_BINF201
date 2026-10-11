@@ -50,13 +50,15 @@ Now, go to the newly created directory (by running `cd Practical6`), and you are
 
 ### For students running on their own pc
 
-You will first have to setup the correct environment with the necessary tools. 
-See [the intro practical](00_IntroSetup.md) on how to install mamba, and how to create an enviroment for downloading the necessary data.
+You will first have to set up the correct environment with the necessary tools. 
+See [the intro practical](00_IntroSetup.md) on how to install micromamba, and how to create an environment for downloading the necessary data.
 
 To create a new environment including the necessary tools for this practical, run the following command:
 
 ```
-mamba create -n Metagenomics spades kraken2 krona metaphlan python=3.11 checkm-genome krakentools concoct bwa-mem2 quast bracken flye minimap2 flash2 cutadapt
+micromamba create -n Metagenomics spades kraken2 krona metaphlan python=3.11 checkm-genome krakentools concoct bwa-mem2 quast bracken flye minimap2 flash2 cutadapt
+micromamba run -n pip install "setuptools<=80.10.2" # this is required for checkm to work
+
 ```
 > This will create a new environment called "Transcriptome" with the necessary tools.
 > We'll use bwa-mem2 and minimap2 for mapping reads, and flash2 for merging paired reads together.
@@ -88,10 +90,10 @@ bracken-build -d KrakenSILVADB -t 2 -k 35 -l 300
 
 - Fix a Concoct bug:
 
-There is a bug in concoct, which can be easily fixed by making a small correction in a script.
+There is a bug in Concoct, which can be easily fixed by making a small correction in a script.
 The problem is in a script called "validation.py" from the sklearn package.
 To fix the bug, you need to know where your Mamba/Conda envs are located.
-Normally this will be in your home folder, but if this is not the case for you modify the commands below as appropriate.
+Normally, this will be in your home folder, but if this is not the case for you, modify the commands below as appropriate.
 First, we need to find the line of the script that contains the bug:
 
 ```

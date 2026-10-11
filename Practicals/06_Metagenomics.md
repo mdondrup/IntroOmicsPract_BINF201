@@ -42,7 +42,7 @@ You can make a copy of the data you will be working on by running this command f
 mkdir -p Practical6
 ln -s /storage/data/06_Metagenomics/* Practical6/
 ```
-> `mkdir -p` creates a folder called Practical6. The "-p" options tells mkdir to create subdirectories if necessary, and to not give an error if the folder(s) already exist
+> `mkdir -p` creates a folder called Practical6. The "-p" option tells mkdir to create subdirectories if necessary, and to not give an error if the folder(s) already exist
 > `ln -s` creates what we call a "symbolic link". This creates a small file that just says "Instead of this file, use the file that I'm liking to". 
 > This allows you to "copy" files without actually having to make a physical copy.
 
@@ -56,7 +56,7 @@ See [the intro practical](00_IntroSetup.md) on how to install mamba, and how to 
 To create a new environment including the necessary tools for this practical, run the following command:
 
 ```
-mamba create -n Metagenomics spades kraken2 krona metaphlan checkm-genome krakentools concoct bwa-mem2 quast bracken flye minimap2 flash2 cutadapt
+mamba create -n Metagenomics spades kraken2 krona metaphlan python=3.11 checkm-genome krakentools concoct bwa-mem2 quast bracken flye minimap2 flash2 cutadapt
 ```
 > This will create a new environment called "Transcriptome" with the necessary tools.
 > We'll use bwa-mem2 and minimap2 for mapping reads, and flash2 for merging paired reads together.

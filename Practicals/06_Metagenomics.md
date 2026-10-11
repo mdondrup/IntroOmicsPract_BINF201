@@ -51,12 +51,12 @@ Now, go to the newly created directory (by running `cd Practical6`), and you are
 ### For students running on their own pc
 
 You will first have to set up the correct environment with the necessary tools. 
-See [the intro practical](00_IntroSetup.md) on how to install micromamba, and how to create an environment for downloading the necessary data.
+See [the intro practical](00_IntroSetup.md) on how to install micromamba and how to create an environment for downloading the necessary data.
 
 To create a new environment including the necessary tools for this practical, run the following command:
 
 ```
-micromamba create -n Metagenomics spades kraken2 krona metaphlan python=3.11 checkm-genome krakentools concoct bwa-mem2 quast bracken flye minimap2 flash2 cutadapt
+micromamba create -n Metagenomics spades kraken2 krona metaphlan python=3.11 checkm-genome krakentools concoct=1.1.0 bwa-mem2 quast bracken flye minimap2 flash2 cutadapt
 micromamba run -n pip install "setuptools<=80.10.2" # this is required for checkm to work
 
 ```
@@ -88,12 +88,13 @@ bracken-build -d KrakenSILVADB -t 2 -k 35 -l 300
 > This will install the KrakenDB in your current directory.
 > Change the `--db` argument if you want to store the database elsewhere.
 
-- Fix a Concoct bug:
+<details>
+<summary> Fix a Concoct bug (likely no longer necessary with the explicit versions given) </summary>
 
-There is a bug in Concoct, which can be easily fixed by making a small correction in a script.
+A bug in Concoct can be easily fixed with a small script correction.
 The problem is in a script called "validation.py" from the sklearn package.
 To fix the bug, you need to know where your Mamba/Conda envs are located.
-Normally, this will be in your home folder, but if this is not the case for you, modify the commands below as appropriate.
+Normally, they're in your home folder, but if they're not, modify the commands below as needed.
 First, we need to find the line of the script that contains the bug:
 
 ```
@@ -112,6 +113,8 @@ Then, replace the line `feature_names = np.asarray(X.columns, dtype=object)`
 to `feature_names = np.asarray(X.columns.astype(str), dtype=object)`.
 Save the file by tapping `Ctrl+O`, and quit by tapping `Ctrl+X`.
 This should fix the bug and make Concoct run without problems.
+
+</details>
 
 Lastly, create a new folder (e.g. `Practical6`), go into it (`cd Practical6`), and then download the necessary data.
 You can either:
@@ -207,7 +210,7 @@ _Some trimming could be good. Adapter levels are generally low, but in some read
 <details>
 <summary>Look at the %GC content plots. Why do we observe some of these weird patterns?</summary>
 
-_Because we are dealing with metagenome samples: the samples contain DNA from multiple organsims, which often have different %QC, leading to the erratic %GC plots._
+_Because we are dealing with metagenome samples: the samples contain DNA from multiple organisms, which often have different % GC, leading to the erratic %GC plots._
 </details>
 
 We will do some basic trimming using cutadapt to get rid of low-quality bases and adapters in the short reads:
@@ -225,12 +228,12 @@ mv tempR.fq Stool_R.fastq
 
 ### Taxonomic profiling of reads
 
-Now that we have QC’ed and filtered our reads we can try a first classification on read level.
+Now that we have QC’d and filtered our reads, we can try a first classification on read level.
 We will first use [kraken2](https://ccb.jhu.edu/software/kraken2/) for this. 
 Kraken extracts _k_-mers from our reads and compares them to a database to classify them. 
 We will first concatenate the paired-end reads from each sample together:
 > Here we will classify the trimmed reads. 
-> It is however debated wether it is better to classify trimmed or raw reads. 
+> It is, however, debated whether it is better to classify trimmed or raw reads. 
 > Raw reads are more representative, but can lead to some errors due to low-quality bases.
 
 ```
@@ -252,11 +255,11 @@ Take a look at the generated reports:
 less *report
 ```
 > This will open all 3 files ending in "report" using the `less` command. 
-To switch between files, you can press `:n` for next file, or `:p` for previous file.
+To switch between files, you can press `:n` for the next file, or `:p` for the previous file.
 
 In the first column, we can see the proportion of reads that is classified as a certain taxonomy (the last column). 
-However, this overview is quite long and complex and difficult to interpret as a human.
-We will use krakentools and kronatools to make a visual overview of the taxonomic distribution in our samples:
+However, this overview is quite long and complex and difficult for a human to interpret.
+We will use krakenTools and kronaTools to make a visual overview of the taxonomic distribution in our samples:
 
 ```
 kreport2krona.py -r Plant.kraken.report -o Plant.krona
@@ -267,17 +270,17 @@ kreport2krona.py -r Sea.kraken.report -o Sea.krona
 ktImportText Sea.krona -o Sea.krona.html
 ```
 > `kreport2krona.py` will convert the kraken output to an output that Kronatools can read.
-> `ktImportText` will transform the modified output to a krona plot.
+> `ktImportText` will transform the modified output to a Krona plot.
 
 Now download and look at the generated `.html` files. 
 > If you have problems downloading the files, you can find the relevant files in [this folder](../Outputs).
 
 You will probably see that most of the plot is unclassified reads.
 This is because we are only classifying the reads using a 16S database. 
-16S is only one of the many genes in bacteria so if we sequence all the DNA from a sample, only few reads will be part of the 16S.
+16S is only one of the many genes in bacteria, so if we sequence all the DNA from a sample, only a few reads will be part of the 16S.
 
-Try double clicking on the "Bacteria" section, in the bottom right corner.
-This will only show the reads classified as bacterial, and give the taxonmic distribution inside that part.
+Try double-clicking on the "Bacteria" section in the bottom right corner.
+This will only show the reads classified as bacterial and give the taxonomic distribution inside that part.
 
 <details>
 <summary>What is the most abundant group in each sample?</summary>

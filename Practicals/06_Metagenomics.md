@@ -386,6 +386,8 @@ A good tool to visualise the structure of our assembly graphs is [BandageJS](htt
 
 There's other software like the original [Bandage](https://github.com/rrwick/Bandage) and [BandageNG](https://github.com/asl/BandageNG) software, but a lot of these is poorly maintained now and cannot be easily downloaded or installed due to missing certificates. If you need to inspect larger assembly graphs, you may want to build BandageNG from source.
 
+Another recommended tool that runs as a local web application is [MetaGenome](https://github.com/marbl/MetagenomeScope). It is easy to install with pip. But it also struggles with larger graphs. Optionally, try it out with the assembly graphs. 
+
 > If you have problems downloading the graph files, you can find the relevant files on [Zenodo](https://zenodo.org/records/17120797).
 
 Go the [BandageJS](https://jbrowse.org/demos/bandagejs/) demo page and upload the `.gfa` files of both assemblies. The stools sample will trigger a warning because a large number of nodes. Click "render anyway". 

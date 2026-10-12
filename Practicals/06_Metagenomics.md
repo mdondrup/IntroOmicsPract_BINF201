@@ -17,7 +17,7 @@ In this tutorial, we will have a look at the following metagenomics and related 
 - [KrakenTools](https://github.com/jenniferlu717/KrakenTools) - Toolkit for anlysing Kraken/Bracken output
 - [Krona](https://github.com/marbl/Krona/releases) - Taxonomy visualisation tool
 - [Bracken](https://github.com/jenniferlu717/Bracken) - Statistical methods for species abundance calculation
-- BandageJS or BandageNG – Assembly Graph Viewers; see the [installation guide](/blob/main/Other/bandage-ng-guide.md) 
+- BandageJS or BandageNG – Assembly Graph Viewers; see the [installation guide](../../main/Other/bandage-ng-guide.md) 
 
 ### For students using NREC
 

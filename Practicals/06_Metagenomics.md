@@ -382,16 +382,18 @@ For your information, the commands used for running the assemblies can be found 
 >metaspades.py -t 2 -1 Stool_F.fastq -2 Stool_R.fastq -o Stool_metaspades
 >```
 
-The reason we provided the assembly graphs (`.gfa`) is because we want to take a look at them.
+The reason we provided the assembly graphs (`.gfa`) is that we want to take a look at them.
 A good tool to visualise the structure of our assembly graphs is [BandageJS](https://jbrowse.org/demos/bandagejs/). 
 
-There's other software like the original [Bandage](https://github.com/rrwick/Bandage) and [BandageNG](https://github.com/asl/BandageNG) software, but a lot of these is poorly maintained now and cannot be easily downloaded or installed due to missing certificates. If you need to inspect larger assembly graphs, you may want to build BandageNG from source.
+There's other software like the original [Bandage](https://github.com/rrwick/Bandage) and [BandageNG](https://github.com/asl/BandageNG) software, but a lot of these are poorly maintained now and cannot be easily downloaded or installed due to missing certificates. If you need to inspect larger assembly graphs, you may want to build BandageNG from source.
+
+See our [summary on available tools and BandageNG installation guide](../../main/Other/bandage-ng-guide.md). 
 
 Another recommended tool that runs as a local web application is [MetaGenome](https://github.com/marbl/MetagenomeScope). It is easy to install with pip. But it also struggles with larger graphs. Optionally, try it out with the assembly graphs. 
 
 > If you have problems downloading the graph files, you can find the relevant files on [Zenodo](https://zenodo.org/records/17120797).
 
-Go the [BandageJS](https://jbrowse.org/demos/bandagejs/) demo page and upload the `.gfa` files of both assemblies. The stools sample will trigger a warning because a large number of nodes. Click "render anyway". 
+Go to the [BandageJS](https://jbrowse.org/demos/bandagejs/) demo page and upload the `.gfa` files of both assemblies. The stools sample will trigger a warning because of a large number of nodes. Click "render anyway". 
 You can draw a frame over a collection of lines (contigs), and see their total length on the right side of the screen.
 
 <details>
@@ -722,8 +724,10 @@ kraken2 --db /storage/data/KrakenSILVADB/ --threads 2 --output Soil_2.kraken.out
 kraken2 --db /storage/data/KrakenSILVADB/ --threads 2 --output Soil_3.kraken.out --report Soil_3.kraken.report Soil_3A.fastq
 ```
 
-We will again visualise the results in a krona plot:
-> An alternative way to visualise the kraken reports, is on the webserver [Pavian](https://fbreitwieser.shinyapps.io/pavian/).
+We will again visualise the results in a krona plot.
+An alternative (and possibly better) way to visualise the kraken reports is the [Pavian web server](https://fbreitwieser.shinyapps.io/pavian/).
+Use Pavian to generate Sankey plots. 
+
 
 ```
 kreport2krona.py -r Soil_1.kraken.report -o Soil_1.krona && ktImportText Soil_1.krona -o Soil_1.krona.html

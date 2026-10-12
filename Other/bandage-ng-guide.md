@@ -61,13 +61,16 @@ Pass the explicit Homebrew Qt6 prefix. Compiling with `-j4` utilizes multiple CP
 ```bash
 open BandageNG.app
 ```
-> 💡 **Tip:** Drag and drop `BandageNG.app` from your current build folder directly into your Mac's primary `/Applications` directory. Because it was compiled locally  on your machine, it bypasses Apple's Gatekeeper quarantine; no unverified developer certificate prompts or security blockades will occur.
+> 💡 **Tip:** Drag and drop `BandageNG.app` from your current build folder directly into your Mac's primary `/Applications` directory. Because it was compiled locally  on your machine, it bypasses Apple's Gatekeeper quarantine so that you won't get unverified developer certificate prompts or security blockades.
+
+<img width="1577" height="1068" alt="image" src="https://github.com/user-attachments/assets/ca472a70-be04-4722-91c0-15ee320170f2" />
+Figure 1: BandageNG window with the small Plant metagenome. Compiled from source under macOS Golden Gate. 
 
 ---
 
 ### 🪟 Compilation Guide for Windows 11
 
-Windows environments require setting up Microsoft Visual Studio compilers alongside the official Qt online software distribution framework.
+Windows environments require setting up Microsoft Visual Studio compilers alongside the official Qt online software distribution framework. Note: I haven't tested that.
 
 #### 1. Install Prerequisites
 1. Download and install **[Visual Studio Community Edition](https://visualstudio.microsoft.com/vs/community/)**. Ensure the **"Desktop development with C++"** workload checkbox is selected during setup.

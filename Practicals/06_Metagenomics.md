@@ -238,8 +238,8 @@ We will first concatenate the paired-end reads from each sample together:
 > Raw reads are more representative, but can lead to some errors due to low-quality bases.
 
 ```
-cat Plant_F.fastq Plant_F.fastq > Plant_all.fastq
-cat Stool_R.fastq Stool_R.fastq > Stool_all.fastq
+cat Plant_[FR].fastq > Plant_all.fastq
+cat Stool_[FR].fastq > Stool_all.fastq
 ```
 
 Then we will run Kraken2, using a 16S database from [SILVA](https://www.arb-silva.de/):

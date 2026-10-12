@@ -7,29 +7,30 @@ This repository contains a comprehensive overview of alternative tools evaluated
 
 ## Part 1: Visualizer Tool Evaluation Summary
 
-Visualizing heavy, complex structures like plant metagenome graphs presents unique technical bottlenecks. Many modern tools offload computing tasks to distinct architecture layers or internet frameworks, which often fail when handling vast datasets or modern hardware restrictions.
+Visualizing heavy, complex structures like plant metagenome graphs presents unique technical bottlenecks. Many modern tools offload computing tasks to distinct architecture layers or internet frameworks, which often fail when handling vast datasets or modern hardware restrictions. In addition, many open-source developers do not have Apple developer certificates to allow safe installation. 
 
 ### Evaluation matrix
 
-| Tool Evaluated | Core Engine Engine | Setup / Runtime Failure Point | Why It Was Ruined for Heavy Datasets (>20k Nodes) |
+| Tool Evaluated | Core Engine Engine | Setup / Runtime Failure Point |  How it worked out for Heavy Datasets (>20k Nodes) |
 | :--- | :--- | :--- | :--- |
 | **Assembly Graph Browser (AGB)** | Desktop Layout Engine | Automated Subgraph Slicing | **Failed Requirement:** It clips the graph structural details to preserve performance; does not depict the full topology. |
-| **BandageJS** | WebAssembly (WASM) | Browser Memory Sandboxing | **Failed Scale:** Throws memory allocation warnings and experiences severe lag due to web browser memory limits. |
+| **[BandageJS](https://jbrowse.org/demos/bandagejs/)** | WebAssembly (WASM) | Browser Memory Sandboxing | **Scale:** Throws memory allocation warnings and experiences severe lag due to web browser memory limits. It worked with the Stool sample. This is the best no-install option. |
 | **GfaViz** | Desktop (Qt5/OGDF) | Missing Subdirectory Target Indexes | **Failed Environment Setup:** The software package is deprecated or unindexed on modern ARM64 package channels. |
 | **gfaestus** | GPU (Vulkan / Rust) | Hardcoded Linker Paths & Missing Portability Flags | **Failed Handshake:** The application lacks the explicit portability extension bit (`VK_INSTANCE_CREATE_ENUMERATE_PORTABILITY_BIT_KHR`) required to interact with Apple Silicon GPUs via MoltenVK. |
 | **Bandage-NG** | Desktop (Qt6 / CMake) | Manual Path Configuration | **SUCCESS:** Bypasses missing package indexes and OS security quarantine locks when compiled directly from source. |
 
 ---
 
-## Part 2: The Definitive Student Guide to Installing Bandage-NG
+## Part 2: The Definitive Guide to Installing Bandage-NG
 
 **Bandage-NG** is the modernized, community-driven fork of the original Bandage application, updated to compile natively with **Qt6, C++17, and CMake**. Compiling directly from source ensures absolute hardware compatibility and maximum rendering efficiency.
 
-### 🍏 Compilation Guide for macOS (Intel & Apple Silicon M1/M2/M3/M4)
+### 🍏 Compilation Guide for macOS (Intel & Apple Silicon (M1–M5))
 
-Modern macOS versions (including **macOS 15+ / Golden Gate**) isolate third-party developer frameworks to specific paths depending on your chip architecture. Passing an explicit layout path variable to CMake forces a successful compile configuration.
+Modern macOS versions (including the latest **macOS 15+ / Golden Gate**) isolate third-party developer frameworks to specific paths depending on your chip architecture. Passing an explicit layout path variable to CMake forces a successful compile configuration.
 
 #### 1. Install Toolsets via Homebrew
+Make sure you have [Homebrew](https://brew.sh/) installed.
 Open your standard Mac terminal and pull down the complete native compiler toolsets:
 ```bash
 brew install qt6 cmake git
@@ -60,7 +61,7 @@ Pass the explicit Homebrew Qt6 prefix. Compiling with `-j4` utilizes multiple CP
 ```bash
 open BandageNG.app
 ```
-> 💡 **Student Tip:** Drag and drop `BandageNG.app` from your current build folder directly into your Mac's primary `/Applications` directory. Because it was compiled locally directly on your machine hardware, it completely bypasses Apple's Gatekeeper quarantine blocks—no unverified developer certificate prompts or security blockades will appear.
+> 💡 **Tip:** Drag and drop `BandageNG.app` from your current build folder directly into your Mac's primary `/Applications` directory. Because it was compiled locally  on your machine, it bypasses Apple's Gatekeeper quarantine; no unverified developer certificate prompts or security blockades will occur.
 
 ---
 

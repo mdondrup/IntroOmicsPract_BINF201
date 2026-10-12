@@ -16,7 +16,7 @@ Visualizing heavy, complex structures like plant metagenome graphs presents uniq
 | **Assembly Graph Browser (AGB)** | Desktop Layout Engine | Automated Subgraph Slicing | **Failed Requirement:** It clips the graph structural details to preserve performance; does not depict the full topology. |
 | **[BandageJS](https://jbrowse.org/demos/bandagejs/)** | WebAssembly (WASM) | Browser Memory Sandboxing | **Scale:** Throws memory allocation warnings and experiences severe lag due to web browser memory limits. It worked with the Stool sample. This is the best no-install option. |
 | **GfaViz** | Desktop (Qt5/OGDF) | Missing Subdirectory Target Indexes | **Failed Environment Setup:** The software package is deprecated or unindexed on modern ARM64 package channels. |
-| **gfaestus** | GPU (Vulkan / Rust) | Hardcoded Linker Paths & Missing Portability Flags | **Failed Handshake:** The application lacks the explicit portability extension bit (`VK_INSTANCE_CREATE_ENUMERATE_PORTABILITY_BIT_KHR`) required to interact with Apple Silicon GPUs via MoltenVK. |
+| **gfaestus** | GPU (Vulkan / Rust) | Hardcoded Linker Paths & Missing Portability Flags | **Makes incompatible binary:** The Rust application builds but the application lacks the explicit portability extension bit (`VK_INSTANCE_CREATE_ENUMERATE_PORTABILITY_BIT_KHR`) required to interact with Apple Silicon GPUs via MoltenVK. |
 | **Bandage-NG** | Desktop (Qt6 / CMake) | Manual Path Configuration | **SUCCESS:** Bypasses missing package indexes and OS security quarantine locks when compiled directly from source. |
 
 ---

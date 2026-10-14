@@ -44,7 +44,7 @@ The IDE is divided into 4 main panes: the source/script pane, the console/termin
 
 ### Source pane
 
-The source pane (top left) is where you will write your scripts. From there you can create new scripts, open existing scripts, modify scripts, etc...
+The source pane (top left) is where you will write your scripts. From there, you can create new scripts, open existing scripts, modify scripts, etc...
 There are two important buttons in this window that you should know:
 
 - The _run_ button: this button runs selected line(s) of your scripts. If nothing is selected, it will run the line where your cursor is currently located. You can also press `Ctrl+Enter` to run code in this way. 
@@ -218,14 +218,14 @@ num_range
 
 #### Lists
 
-Lists are very similar to vectors, but allow mixing items of differen types (similar to a python list).
+Lists are very similar to vectors, but allow mixing items of different types (similar to a Python list).
 
 ```
 my_list = list(1, 2, 'UiB', list('a', 'b', 'c'), c(1, 2, 3))
 my_list
 ```
 
-As you might notice based on how the list is displayed in the console, they work a bit different. This also affects how we extract an element from a list.
+As you might notice based on how the list is displayed in the console, they work a bit differently. This also affects how we extract an element from a list.
 
 ```
 second_item <- my_list[[2]]
@@ -238,7 +238,7 @@ second_item
 _`my_list[[4]][[2]]`_
 </details>
 
-Lists in R also work like dictionaries. We can store elements, and link them to a key to create named lists:
+Lists in R also work like dictionaries. We can store elements and link them to a key to create named lists:
 
 ```
 named_list <- list(a = 1,
@@ -247,7 +247,7 @@ named_list <- list(a = 1,
                    d = list('a', 'b', 'c'))
 ```
 
-To have acces to the named items, we use the `$`:
+To have access to the named items, we use the `$`:
 
 ```
 named_list$a
@@ -265,16 +265,16 @@ read <- list(read_id = "@rtuuk-2048fh4-ljkr-werjjt90",
 
 #### Matrix
 
-Matrices in R are not really a separate object, but rather a combination or rearangement of vectors.
+Matrices in R are not really a separate object, but rather a combination or rearrangement of vectors.
 They have an additional property: their dimensions (the number of rows & columns).
-As they are vectors, matrices can only store data from the same datatype.
+As they are vectors, matrices can only store data from the same data type.
 
 ```
 my_mat1 <- matrix(data = c(2, 3, 5, 6), nrow = 2, ncol = 2)
 my_mat1
 ```
 
-You can see that the function rearanged the data based on the dimensions.
+You can see that the function rearranged the data based on the dimensions.
 
 <details>
 <summary>The matrix got filled in column by column. Try using the help function to find out how you could fill it row by row instead.</summary>
@@ -284,17 +284,17 @@ _You have to add the argument `byrow=TRUE`. (type `?matrix` to show the help mes
 </details>
 
 To get a specific element from a matrix, you need to specify both the row and the column.
-Leaving one of both blank will give you the full row or column.
+Leaving one of them blank will give you the full row or column.
 
 ```
-my_mat1[1,2] # element on first row, second column
+my_mat1[1,2] # element in the first row, second column
 my_mat1[1,] # first row
 my_mat1[,1]|# first column
 ``` 
 
 #### Dataframe
 
-Dataframes are maybe the most important data type in R.
+Dataframes are possibly the most important data structure in R.
 They are used for most tabular data, and most packages work with data frames or derived structures.
 The dataframe can be seen as a special kind of list, where all elements of the list have the same length.
 Similar to lists, the elements can be named. The most common way is to name the columns.
@@ -324,19 +324,22 @@ Large datasets are often stored in files.
 These files can be tab-delimited (`.tsv`) or comma-separated (`.csv`).
 R has integrated functions to easily load these kinds of files as dataframes.
 
-First, download a test file from [here](https://universityofbergen-my.sharepoint.com/:x:/g/personal/bram_danneels_uib_no/ET6hVwt-fJpDi1iG9fMlyCYBD4EhtfSb-fcCCkykABtIlA?e=KJw3Hc).
-Open it in a text editor of your choice, and answer these short questions:
+First, download a test file from [here]().
+
+See https://ourworldindata.org/2026-lpi-update for details on the data and how to interpret them.
+
+Open the file in a text editor of your choice, and answer these short questions:
 
 <details>
 <summary>Is there a header (line with column names)? What line is the header?</summary>
 
-_The header is on line 5_ (`"year", "region", "Gbbl"`)
+_The header is on line 8_ (`Entity, Code, Year, Central estimate, Upper estimate, Lower estimate`)
 </details>
 
 <details>
 <summary>How many columns are there?</summary>
 
-_3_
+_6_
 </details>
 
 <details>
@@ -347,20 +350,24 @@ _Comma-separated_
 
 <details>
 <summary>What datatypes are the columns?</summary>
+	
+ - Entity: String/Factor
+ - Code: String/Factor
+ - Year: Numeric
+ - Central estimate, Upper estimate, Lower estimate: Numeric
 
-- _Year: numeric_
-- _Region: string_
-- _Gbbl: numeric_
 
 </details>
 
-Now lets try reading the file into R.
+Now let's try reading the file into R.
 
 ```
-df <- read.table(file = './data/oil_production.csv', # Change this path as appropriate 
+df <- read.table(file = './data/global-living-planet-index.csv', # Change this path as appropriate 
                  header = TRUE, 
-                 skip = 4, 
+                 skip = 7, 
                  sep = ',')
+
+
 head(df)
 tail(df)
 ```
@@ -370,13 +377,13 @@ We have loaded the dataframe in R. You can explore it manually by clicking on it
 <details>
 <summary>Are there any missing values in the dataframe? How are they treated in R?</summary>
 
-_There is one missing value: Eurasia 1900. R assigns them as "NA"._
+_There are multiple missing values: R assigns them as "NA" by default._
 </details>
 
 <details>
 <summary>What happens if you set the header to FALSE?</summary>
 
-_The header line will be counted as data rather than header/column names._
+_The.  header line will be counted as data rather than header/column names._
 </details>
 
 <details>

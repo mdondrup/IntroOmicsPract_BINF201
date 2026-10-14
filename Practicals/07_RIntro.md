@@ -99,7 +99,7 @@ Have a look at the "New terminals open with" section, and check what kind of she
 
 On the top right, you can find the Environment and History panes/tabs.
 
-The environment tab is very useful, as it allows you to quickly check the value of variables that you assigned, or datasets that you created.
+The Environment tab is very useful, as it allows you to quickly check the value of variables that you assigned or datasets that you created.
 If you have large tables or special data structures, you can click on them in the Environment pane, and they will open in the Source pane for you to explore.
 
 The history tab is very basic. It shows you the history of commands that were run by R, similar to the `history` command in Linux.
@@ -387,9 +387,27 @@ _The.  header line will be counted as data rather than header/column names._
 </details>
 
 <details>
-<summary>Why do we need to add the ´skip=4´ argument?</summary>
+<summary>Why do we need to add the ´skip=7´ argument?</summary>
 
-_Because the first 4 lines are comments that we do not want in our dataset._
+_Because the first 7 lines are comments that we do not want in our dataset. We could also simply the `comment.char="%"` parameter._
+</details>
+
+<details>
+<summary>Find aut more statistics about the data set: number of column/rows, etch</summary>
+ ```
+ > summary(df)
+       Entity           Code          Year      Central.estimate  Upper.estimate   Lower.estimate  
+ Length   :477   Length   :477   Min.   :1970   Min.   :0.05062   Min.   :0.0907   Min.   :0.0282  
+ N.unique :  9   N.unique :  4   1st Qu.:1983   1st Qu.:0.41263   1st Qu.:0.5708   1st Qu.:0.2767  
+ N.blank  :  0   N.blank  :318   Median :1996   Median :0.63226   Median :0.8620   Median :0.4931  
+ Min.nchar:  5   Min.nchar:  0   Mean   :1996   Mean   :0.63602   Mean   :0.7953   Mean   :0.5199  
+ Max.nchar: 31   Max.nchar:  8   3rd Qu.:2009   3rd Qu.:0.89364   3rd Qu.:1.0268   3rd Qu.:0.7612  
+                                 Max.   :2022   Max.   :1.29482   Max.   :1.4984   Max.   :1.1199  
+> dim(df)
+[1] 477   6
+
+ ```
+
 </details>
 
 ### Functions

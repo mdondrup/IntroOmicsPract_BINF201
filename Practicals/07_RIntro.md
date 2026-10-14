@@ -362,10 +362,12 @@ _Comma-separated_
 Now let's try reading the file into R.
 
 ```
-df <- read.table(file = './data/global-living-planet-index.csv', # Change this path as appropriate 
+df <- read.table(file = './Practical7/global-living-planet-index.csv', # Change this path as appropriate 
                  header = TRUE, 
                  skip = 7, 
                  sep = ',')
+## alternatively or better for CSV files:
+df <- read.csv(file="./Practical7/global-living-planet-index.csv", comment.char = '%')
 
 
 head(df)
@@ -394,6 +396,7 @@ _Because the first 7 lines are comments that we do not want in our dataset. We c
 
 <details>
 <summary>Find aut more statistics about the data set: number of column/rows, etch</summary>
+	
  ```
  > summary(df)
        Entity           Code          Year      Central.estimate  Upper.estimate   Lower.estimate  

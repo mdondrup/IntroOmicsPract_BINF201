@@ -1,52 +1,53 @@
 # Practical 7 - Introduction to R
 
-In this short practical we will have a quick look at the [R programming langague](https://www.r-project.org/).
+In this short practical, we will have a quick look at the [R programming language](https://www.r-project.org/).
 
 ## What is R?
 
-R is a statistical programming language. 
-Its strength lies in the vast ecosystem of packages available for doing everything from basic statistics, to plotting, to biological data analysis. 
+R is a statistical programming language. R is an open-source implementation of S (Venables, WN and Ripley, BD. S Programming, Springer, 2000).  
+S is a high-level language for manipulating, analysing, and visualising data.
+Its strength lies in its vast ecosystem of packages for everything from basic statistics to plotting to biological data analysis. 
 It is a great programming language to have under your belt.
 
-Most analyses in R uses R packages.
-Packages are collections of scripts, functions, and datastructures specific for a certain task or analysis.
+Most analyses in R use R packages.
+Packages are collections of scripts, functions, and data structures specific to a certain task or analysis.
 Packages are stored in central repositories (similar to the conda/conda-forge/bioconda repositories). 
 Repositories are hubs where packages are located. 
 The main R package repository is [CRAN](https://cran.r-project.org/), where many general and statistical packages are stored.
-For bioinformatic packages, there is [Bioconductor](https://www.bioconductor.org/).
-In the practicals to come, we will be using packages from both CRAN and Bioconductor the analysis of RNA-seq data.
+For bioinformatics packages, there is [Bioconductor](https://www.bioconductor.org/).
+In the practicals to come, we will be using packages from both CRAN and Bioconductor for the analysis of RNA-seq data.
 
 ## Is it useful to learn R?
 
 It depends.
 
-R has a specific syntax and focus. 
-It is a very common programming languages for statistical analysis and modelling.
-While probably not essential for all bioinformatics jobs, it is allways useful to know the basics.
+R has a specific (peculiar) syntax and focus. 
+It is a very common programming language for statistical analysis and modelling.
+While probably not essential for all bioinformatics jobs, it is always useful to know the basics.
 If you know R and another programming language like C or Python, you already have a good basis to start.
 
 ## Installing R & Rstudio
 
-If you haven't already (see [Practical 0](00_IntroSetup.md), please install R and Rstudio.
-You can simply follow the instructions on the [Rstudio website](https://posit.co/download/rstudio-desktop/).
+If you haven't already (see [Practical 0](00_IntroSetup.md), please install R and RStudio.
+You can simply follow the instructions on the [RStudio website](https://posit.co/download/rstudio-desktop/).
 
-As with many programming languages, it is easier to use a dedicated IDE (Integrated Development Environment) than to write scripts in a text editor, and run them on the command line.
-The IDE allows to better handle and orginise your scripts. It also allows easy visualisation of plots and a better overview of variables and your environment.
+As with many programming languages, it is easier to use a dedicated IDE (Integrated Development Environment) than to write scripts in a text editor and run them on the command line.
+The IDE allows you to better handle and organise your scripts. It also allows easy visualisation of plots and a better overview of variables and your environment.
 
-## Getting to know Rstudio
+## Getting to know RStudio
 
-Start by opening Rstudio. If all goes well, you should see something similar to the image below.
+Start by opening RStudio. If all goes well, you should see something similar to the image below.
 
 ![Rstudio IDE](../Other/RstudioIDE.png)
 
-The IDE is divided in 4 main panes: the source/script pane, the console/terminal pane, the environment/history pane, and the files/plots/packages/help pane.
+The IDE is divided into 4 main panes: the source/script pane, the console/terminal pane, the environment/history pane, and the files/plots/packages/help pane.
 
 ### Source pane
 
 The source pane (top left) is where you will write your scripts. From there you can create new scripts, open existing scripts, modify scripts, etc...
 There are two important buttons in this window that you should know:
 
-- The _run_ button: this button runs selected line(s) of your scripts. If nothing is selected, it will run the line where your cursor is currently located. You can also press `Ctr+Enter` to run code in this way. 
+- The _run_ button: this button runs selected line(s) of your scripts. If nothing is selected, it will run the line where your cursor is currently located. You can also press `Ctrl+Enter` to run code in this way. 
 - The _source_button: this will run the whole script in one go.
 
 Try opening a new file (File -> New File -> R Script), and write the following code:
@@ -69,9 +70,9 @@ Try running every line one at a time, running two lines at once, and running the
 ### Console/Terminal pane
 
 The pane on the bottom left contains the console and the terminal.
-You might have already noticed that once you "run" code, it is send to the console, and excecuted there.
+You might have already noticed that once you "run" code, it is sent to the console and executed there.
 The results of the code will also be displayed there.
-In the console you can also type and run code directly. However, this code will not be saved in your script.
+In the console, you can also type and run code directly. However, this code will not be saved in your script.
 This is especially useful if you want to quickly test a function or piece of code, or want to see the contents of a variable.
 
 Try writing the following pieces of code directly in the console:
@@ -87,27 +88,27 @@ c / 2
 The "Terminal" tab brings you to the terminal.
 While the console allows you to interact with everything happening within your R environment,
 the terminal allows you to interact with the filesystem (similar to the shell).
-Using the terminal you can create directories, list files in directories, etc...
+Using the terminal, you can create directories, list files in directories, etc...
 
-Try going to the terminal tab, and click on "Terminal 1", and then "Terminal Options...".
-Have a look at the "New terminals open with" section, and check what kind of shell is used by your Rstudio.
-> In my case, Rstudio used the Git Bash to interact with the system.
-> If you do not have Git GUI installed on your system, this will likely by something else (command prompt, mac terminal, powershell, ...).
+Try going to the Terminal tab, and click on "Terminal 1", and then "Terminal Options...".
+Have a look at the "New terminals open with" section, and check what kind of shell is used by your RStudio.
+> In my case, RStudio used Git Bash to interact with the system.
+> If you do not have Git GUI installed on your system, this will likely be something else (Command Prompt, Mac Terminal, PowerShell, ...).
 
 ### Environment/History
 
-On the top right you can find the Environment and Histor panes/tabs.
+On the top right, you can find the Environment and History panes/tabs.
 
 The environment tab is very useful, as it allows you to quickly check the value of variables that you assigned, or datasets that you created.
-If you have large tables or special data structures, you can click on them in the environment pane, and they will open in the source pain for you to explore.
+If you have large tables or special data structures, you can click on them in the Environment pane, and they will open in the Source pane for you to explore.
 
-The history tab is very basic. It shows you the history of commands that were run by R, similar to the `history` command in linux.
+The history tab is very basic. It shows you the history of commands that were run by R, similar to the `history` command in Linux.
 
 ### Files/Plots/Packages/Help
 
 Lastly, there are multiple tabs in the bottom right.
 
-The Files tab allows you to brows your working directory (the directory you are working from).
+The Files tab allows you to browse your working directory (the directory you are working from).
 It also allows you to quickly create new files and folders, or open them directly in R.
 
 The Plots tab will display figures that we create.
@@ -115,7 +116,7 @@ The Plots tab will display figures that we create.
 The Packages tab has an overview of all packages currently installed in R.
 You can use this tab to install, update, and remove packages.
 In contrast to package management by `conda`, having installed a package doesn't mean we can use it straight away. 
-You will have to load a library in you script/console before you can have access to it's packages (similar to activating a conda environment.
+You will have to load a library in your script/console before you can have access to its packages (similar to activating a conda environment.
 We will see more about package management later.
 
 Lastly, the Help tab allows you to search for the help pages on packages and functions. You can use the search bar, or type `?function` to see the help page of the function.
@@ -123,7 +124,7 @@ You can also type `??keyword` to search the R documentation for a certain keywor
 
 ## The basics of R
 
-Now that you know a bit how to navigate R studio, it is time to get to know some basic functions and data structures.
+Now that you know a bit how to navigate RStudio, it is time to get to know some basic functions and data structures.
 
 ### Operators & variables
 
@@ -143,7 +144,7 @@ Some basic code using some of these operators:
 ```
 x <- 3 # assign a value of 3 to a variable named x
 y <- 12 # assign  a value of 12 to a variable named y
-y <- y + 1 # increase the value of y with 1
+y <- y + 1 # increase the value of y by 1
 y
 ```
 
@@ -154,11 +155,11 @@ or by using camel case (quiteLongVariableName).
 You cannot use blank spaces in variable names. 
 R is case sensitive: Abc and abc are different variables. 
 Good practice is to make variable names long enough to be clear but short enough to type easily. 
-For example, N.per.ha or pop.density are better than x and y (too generic) or available.nitrogen.per.hectare (too long).
+For example, `N.per.ha` or `pop.density` are better than x and y (too generic) or available.nitrogen.per.hectare (too long).
 
 Text starting with # is called a comment.
-It is commonly used to annotate the code with human readable text for better understanding. 
-Anything can be written in a comment, and comments will not be excecuted by the console.
+It is commonly used to annotate the code with human-readable text for better understanding. 
+Anything can be written in a comment, and comments will not be executed by the console.
 
 <details>
 <summary>Try creating a new variable called "myName" which contains your name.</summary>
@@ -176,7 +177,7 @@ We will discuss four of them here: the atomic vector, the list, the matrix, and 
 
 #### Atomic vectors
 
-An atmoic vector (mostly just called vector), is a collection of values of the same type (e.g. all integers or strings).
+An atomic vector (mostly just called a vector) is a collection of values of the same type (e.g., all integers or strings).
 Vectors are defined using the `c()` function.
 
 ```
@@ -294,9 +295,9 @@ my_mat1[,1]|# first column
 #### Dataframe
 
 Dataframes are maybe the most important data type in R.
-They are used for most tabular data, and most packages work with dataframes or derived structures.
+They are used for most tabular data, and most packages work with data frames or derived structures.
 The dataframe can be seen as a special kind of list, where all elements of the list have the same length.
-Similar to lists the elements can be named. The most common way is to name the columns.
+Similar to lists, the elements can be named. The most common way is to name the columns.
 The `$` can then be used to access a certain column.
 
 ```
@@ -314,14 +315,14 @@ Now try making a dataframe yourself, with the following properties:
 - A character column containing CGPA 3.9, 3.2, 1.2, and 3.7
 - A logical column has_passed containing TRUE, TRUE, FALSE, and TRUE
 
-Locate the dataframe you just made in the Environment pane and just view the it.
-Use the `dim` function to find the dimensions of the database.
+Locate the dataframe you just made in the Environment pane and just view it.
+Use the `dim` function to find the dimensions of the dataframe.
 
 ### Reading files
 
 Large datasets are often stored in files.
-These files can be tab-delimited (´.tsv´) or comma-separated (´.csv´).
-R has integrated functions to easily load these kind of files as dataframes.
+These files can be tab-delimited (`.tsv`) or comma-separated (`.csv`).
+R has integrated functions to easily load these kinds of files as dataframes.
 
 First, download a test file from [here](https://universityofbergen-my.sharepoint.com/:x:/g/personal/bram_danneels_uib_no/ET6hVwt-fJpDi1iG9fMlyCYBD4EhtfSb-fcCCkykABtIlA?e=KJw3Hc).
 Open it in a text editor of your choice, and answer these short questions:
@@ -329,7 +330,7 @@ Open it in a text editor of your choice, and answer these short questions:
 <details>
 <summary>Is there a header (line with column names)? What line is the header?</summary>
 
-_The header is at line 5_ (`"year","region","Gbbl"`)
+_The header is on line 5_ (`"year", "region", "Gbbl"`)
 </details>
 
 <details>
@@ -364,7 +365,7 @@ head(df)
 tail(df)
 ```
 
-We how have loaded the dataframe in R. You can explore it manually by clicking on it in the "environment" pane.
+We have loaded the dataframe in R. You can explore it manually by clicking on it in the "environment" pane.
 
 <details>
 <summary>Are there any missing values in the dataframe? How are they treated in R?</summary>
@@ -375,7 +376,7 @@ _There is one missing value: Eurasia 1900. R assigns them as "NA"._
 <details>
 <summary>What happens if you set the header to FALSE?</summary>
 
-_The header line will counted as data rather than header/column names._
+_The header line will be counted as data rather than header/column names._
 </details>
 
 <details>
@@ -392,7 +393,7 @@ Rather than writing these lines of code again and again every time, we can make 
 Then we just have to call the function (a function call is just one line of code) whenever we need to use that piece of code again. 
 This makes the code shorter, easier to read, and you only need to modify the main function if you want to change it.
 
-Let us write a small function which takes as input two numbers, and calculates their sum, difference, product, and division.
+Let us write a small function that takes two numbers as input and calculates their sum, difference, product, and division.
 
 ```
 sum_diff_prod <- function (num1, num2) {
@@ -409,9 +410,9 @@ result2 <- sum_diff_prod(5, 6)
 result3 <- sum_diff_prod(7, 8)
 ```
 
-The function definition on the top defines inputs, outputs, and how the input are transformed into the output. 
+The function definition at the top defines inputs, outputs, and how the inputs are transformed into the output. 
 Any two numbers can be provided to the function during the function call. 
-The results are stored into a list, and then the list is returned. 
+The results are stored in a list, and then the list is returned. 
 If needed, the resulting list can be unpacked like this:
 
 
@@ -428,12 +429,14 @@ The function needs to calculate the highest value, lowest value, mean, and media
 ### Loops and conditionals
 
 Loops are used to repeat a certain piece of code a certain number of times.
-It is mosed used to go through a list or dataframe, and so something with each element.
+They are most used to go through a list or dataframe and do something with each element.
 
-Conditionals test if a certain conditions are met (IF - ELSE). 
+**Note: the use of for-loops is not very performant and is generally considered tedious in R. Use R's vectorized syntax (more later) instead whenever possible.**
+
+Conditionals test if certain conditions are met (IF - ELSE). 
 They will do something if a condition evaluates to true, and nothing (or something else if defined) if not.
 
-Let's try writing a small for-loop that goes to a set of numbers, and checks if they are divisible by 3.
+Let's try writing a small for-loop that goes through a set of numbers and checks if they are divisible by 3.
 
 ```
 a <- 1:30

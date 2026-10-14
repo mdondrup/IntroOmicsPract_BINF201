@@ -324,7 +324,7 @@ Large datasets are often stored in files.
 These files can be tab-delimited (`.tsv`) or comma-separated (`.csv`).
 R has integrated functions to easily load these kinds of files as dataframes.
 
-First, download a test file from [here]().
+First, download a test file from [here](https://raw.githubusercontent.com/mdondrup/IntroOmicsPract_BINF201/refs/heads/main/Other/global-living-planet-index.csv).
 
 See https://ourworldindata.org/2026-lpi-update for details on the data and how to interpret them.
 

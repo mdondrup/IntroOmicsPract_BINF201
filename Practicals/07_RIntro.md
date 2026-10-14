@@ -62,7 +62,7 @@ b
 c <- a + b
 c
 ```
-> R uses `<-` for assigning variables, rather than `=` which is used in Python.
+> R uses `<-` (and `->`) for assigning variables, rather than `=` which is used by many other languages (it's possible to use `=`, too, as left-assignment).
 
 Try running every line one at a time, running two lines at once, and running the whole script at once.
 > To use the _source_ button, you might have to save your file first.
@@ -153,7 +153,7 @@ You can break up long names with a period, as in long.variable.number.3,
 an underscore (very_very_long_variable_name), 
 or by using camel case (quiteLongVariableName). 
 You cannot use blank spaces in variable names. 
-R is case sensitive: Abc and abc are different variables. 
+R is case-sensitive: Abc and abc are different variables. 
 Good practice is to make variable names long enough to be clear but short enough to type easily. 
 For example, `N.per.ha` or `pop.density` are better than x and y (too generic) or available.nitrogen.per.hectare (too long).
 

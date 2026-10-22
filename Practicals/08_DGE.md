@@ -313,6 +313,25 @@ _which gives us 13 results._
 _Then we can check how many of the padj values are below 0.05: `sum(resFC$padj < 0.05, na.rm=T)`_
 </details>
 
+## Volcano Plot
+
+You can use the package EnhancedVolcano to make thes plot
+
+```
+BiocManager::install('EnhancedVolcano')
+library(EnhancedVolcano)
+
+EnhancedVolcano(res,
+                lab = rownames(res),
+                x = 'log2FoldChange',
+                y = 'padj',
+                pCutoff = 0.05,
+                FCcutoff = 1.0,
+                pointSize = 1.5,
+                labSize = 3.0)
+```
+
+
 ## References:
 
 -   [DESeq2 tutorial](https://bioconductor.org/packages/release/bioc/vignettes/DESeq2/inst/doc/DESeq2.html).

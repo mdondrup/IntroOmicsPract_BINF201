@@ -313,6 +313,12 @@ _which gives us 13 results._
 _Then we can check how many of the padj values are below 0.05: `sum(resFC$padj < 0.05, na.rm=T)`_
 </details>
 
+## Plot counts for genes of interest
+
+```
+plotCounts(ds, gene="AT1G68238") # plot the gene with the highest log2FC
+```
+
 ## Volcano Plot
 
 You can use the package EnhancedVolcano to make thes plot

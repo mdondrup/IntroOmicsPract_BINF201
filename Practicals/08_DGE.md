@@ -43,7 +43,7 @@ if (!requireNamespace("BiocManager", quietly = TRUE)) {
 }
 
 # Installs all packages you don't have in this list
-package.list <- c("Rsamtools", "GenomicFeatures","GenomicAlignments","DESeq2","GOstats","GO.db","Category","org.At.tair.db")
+package.list <- c("Rsamtools", "GenomicFeatures","GenomicAlignments","DESeq2","GOstats","GO.db","Category","org.At.tair.db","txdbmaker")
 for (package in package.list) { 
   if (!requireNamespace(package, quietly = TRUE))
     BiocManager::install(package, ask = FALSE)
@@ -89,6 +89,7 @@ We will load the `gtf` as a database object (called `txdb`).
 
 ```
 library(GenomicFeatures, quietly = TRUE)
+library(txdbmaker, quietly = TRUE)
 txdb = makeTxDbFromGFF(paste0(data_folder, "Arabidopsis.gtf"), format="gtf")
 ```
 

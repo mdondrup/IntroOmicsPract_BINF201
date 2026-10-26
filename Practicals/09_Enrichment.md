@@ -17,7 +17,7 @@ We will perform the analyses on the results from a DESeq2 analysis on _Drosophil
 We can directly import the data from the download link:
 
 ```
-df <- read.csv("https://learn.gencore.bio.nyu.edu/wp-content/uploads/2019/10/drosphila_example_de.csv", header=TRUE)
+df <- read.csv("https://raw.githubusercontent.com/mdondrup/IntroOmicsPract_BINF201/refs/heads/main/Other/drosphila_example_de.csv", header=TRUE)
 head(df)
 ```
 

@@ -219,19 +219,19 @@ dotplot(kegg, showCategory=10, split=".sign") + facet_grid(.~.sign)
 ```
 
 You can see that a lot less functions are displayed.
-The main reason is that a majority of genes does not have a KEGG mapping, and thus the will not contribute to the analysis.
+The main reason is that a majority of genes do not have a KEGG mapping, and thus they will not contribute to the analysis.
 This is because KEGG contains only biochemical pathways that are well-studied.
-The benefit is however, that we can visualise certain pathways, and map our fold changes to it.
-Let's have a look at one of the patways from our GSE analysis.
+The benefit is, however, that we can visualise certain pathways and map our fold changes to them.
+Let's have a look at one of the pathways from our GSE analysis.
 You can see the significant pathways by calling the object, or looking at the summary (run `summary(kegg)`).
 We will look at dme00480 - Glutathione metabolism here.
 
 ```
 dme <- pathview(gene.data=keggFC, pathway.id="dme00480", species = "dme")
 ```
-> This will create a figure, and save it in your working directory
+> This will create a figure and save it in your working directory
 
-Open the created figure, and have a look at it.
+Open the created figure and have a look at it.
 
 <details>
 <summary>What are the different boxes?</summary>
@@ -242,40 +242,52 @@ _They represent enzymes/genes that are part of the pathway._
 <details>
 <summary>What do the colours represent?</summary>
 
-_The represent the log2FC of the gene coding for that enzyme._
+_ They represent the log2FC of the gene coding for that enzyme._
 </details>
 
 ## Enrichment analysis using browser 
 
-Enrichment analysis can also be done using some webtools, especially for model organisms.
-Here we will have a look at [GOrilla](http://cbl-gorilla.cs.technion.ac.il/).
-As implied by the name, it works only with GO annotations.
+Enrichment analysis can also be done using some web tools, especially for model organisms.
+Many online tools exist to perform overrepresentation and/or gene set enrichment analysis.
 
-GOrilla can do both overrepresentation and gene set enrichment analysis.
+Eg.:
+ - [ShinyGO](https://bioinformatics.sdstate.edu/go/) 
+ - [GOrilla](http://cbl-gorilla.cs.technion.ac.il/). As the name implies, GOrilla works only with GO annotations.
+ - [DAVID](https://davidbioinformatics.nih.gov/)
+ - [g:Profiler](https://biit.cs.ut.ee/gprofiler/gost)
+ - [Gene Ontology](https://geneontology.org/)
 
-Let's try doing the gene set enrichment here.
-To do this, GOrilla needs a **ranked** list of genes.
-This means that you need to sort your genes by log2FC first.
+Many of these tools can do multiple analyses and visualizations, and they have different organisms they support. 
 
-Try using the `write.table` function to create this list.
-> Hint: you can work from one of the dataframes we have used in the analyses above.
+Let's try doing the gene set enrichment using some of these tools.
 
-Then go to GOrilla web page, upload the created file, and run it using the following settings:
+Try some of the tools above, upload the created file, and run it using the following settings (if required):
 
-- Organism: the correct organism we used in this tutorial</li>
+- Organism: the correct organism we used in this tutorial
+- Background set: Think about what to use as your background set
 - Running mode: The appropriate one for our data (did we store the data in an ordered list, or two lists?)
 
 Run the analysis and inspect the results, and compare to the results from the analysis in R.
-You can also try doing the overrepresentation analysis.
-To do that, you'll have to create a list of all your genes (background), and a list of the differentially expressed genes (target).
+Look at the different analyses and visualizations and compare the focus and strengths of the different tools.
 
-Many online tools exist to perform overrepresentation and/or gene set enrichment analysis.
-Another good online tool is [g:Profiler](https://biit.cs.ut.ee/gprofiler/gost), which has most genomes on ENSEMBL.
+ - Which tool is most versatile and user-friendly?
+ - Do all tools accept our gene list?
+
+You can also try doing the overrepresentation analysis.
+To do that, you'll have to create a list of all your genes (background) and a list of the differentially expressed genes (target).
+This means that you need to sort your genes by log2FC first, then export the gene name column. 
+
+Some tools need a **ranked** list of genes, but all need some sort of gene list.
+Try using the `write.table` function to export a ranked list of DEGs (define a sensible cutoff). 
+> Hint: you can work from one of the dataframes we have used in the analyses above.
+
+Go back to the gene expression data from Practical 8. Attempt to export a ranked gene list as well.
+Do the tools accept Arabidopsis thaliana genes?
 
 ## Working with non-model species
 
-As you might have noticed, all above analysis use pre-existing databases of our model species.
-If you are working on a species that does not have one of these databases, things are a bit more tricky.
+As you might have noticed, all the above analyses use pre-existing databases of our model species.
+If you are working on a species that does not have one of these databases, things are a bit trickier.
 
 First, you'll need to annotate the genes of your species.
 This means you need to attach GO-terms or KEGG pathways to your genes.
